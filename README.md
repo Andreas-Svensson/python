@@ -1,12 +1,12 @@
 # Python-Andreas-Svensson
 
-This repository holds all my files related to the Python programming course at ITHS
+This repository holds all my files related to the Python Programming course at ITHS
 
 ---
 
 ## The Python Programming Course
 
-This is a fundamental Python course with focus on learning important programming concepts in order to solve various problems by writing Python programs
+This is a fundamental python course with focus on learning important programming concepts in order to solve various problems by writing python programs
 
 ---
 
