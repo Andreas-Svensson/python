@@ -51,7 +51,9 @@ In this example, how much the price is affected based on living area, amount of 
 ### **1.2 Algorithm Usage** 
 
 
-*Example from datascience*
+<details>
+  <summary>Example from datascience</summary>
+  
 ```py
 **IN**:
 model3 = lm(price ~ sqft_living + floors + yr_built, data = data)
@@ -70,6 +72,9 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 Multiple R-squared:  0.5335, Adjusted R-squared:  0.5334 
 F-statistic:  8237 on 3 and 21609 DF,  p-value: < 2.2e-16
 ```
+</details>
+Using the above example, we can read the following values: 
+<br/><br/>
 
 **r2 (R-squared)** - 0.5335  
 Describes how much of the target variable is explained by the model (from 0 to 1) 
