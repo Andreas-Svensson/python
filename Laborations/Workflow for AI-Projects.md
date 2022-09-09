@@ -26,7 +26,9 @@ Definition
 
 Linear regression is a machine learning algorithm which finds likeliness between two or more variables... 
 
-Below follows a more general description which will later be used as a specific example to predict house prices 
+Below follows a more general description which will later be used as a specific example to predict house prices. 
+
+<br/><br/>
 
 ### **1.1 Algorithm Explanation** 
 The algorithm uses the following formula:  
@@ -35,18 +37,18 @@ The algorithm uses the following formula:
 
 where:  
 **Y = Dependent variable**  
-The variable being predicted by the algorithm, house price in this example  
+The variable being predicted by the algorithm, house price in this example.  
 
-**X = Explanatory variable**  
-Variable(s) attempting to "explain" the target variable (Y)  
-In this example it could be parameters such as living area, amount of floors, etc  
+**X\* = Explanatory variables**  
+Variable(s) x1, x2 ... attempting to "explain" the target variable (Y)  
+In this example it could be parameters such as living area, amount of floors, etc.  
 
 **a = Baseline value**  
-Value of the target variable (Y) when explanatory variables (X) are 0  
+Value of the target variable (Y) when explanatory variables (X*) are 0  
 In this example, the house price when selected variables living area, amount of floors, etc are 0. In other words, the price of a house without any features, the cheapest a house can possibly be.  
 
 **b = Coefficient**  
-How much explanatory variables (X) adds to the target variable (Y)  
+How much explanatory variables (X*) adds to the target variable (Y)  
 In this example, how much the price is affected based on living area, amount of floors, etc
 
 <br/><br/>
@@ -112,11 +114,9 @@ Indicates confidence level of estimation
 
 ## **3.0 Data Gathering** 
 
-Below follows ways to gather data, and how that data can be formatted in order to achieve optimal results using linear regression. 
-
 If you are employed by a company to solve a task, they might often have the data for you to use.  
-Otherwise, some commonly used places for finding datasets to use in machine learning are: 
 
+Otherwise, some commonly used places for finding datasets to use in machine learning are:   
 Google dataset search  
 Kaggle  
 GitHub  
@@ -124,13 +124,15 @@ Government sources
 FiveThirtyEight  
 data.world  
 
-If none of the above examples are sufficient, and you are able to generate data yourself, you can also make your own datasets based on generated data. This requires a case where data can be readily created and fed back into the algorithm by the application you are using.
+If none of the above examples are sufficient, and you are able to generate data yourself, it is also possible to make your own datasets based on generated data. This requires a case where data can be readily created and fed back into the algorithm by the application you are using or by gathering data from polls.
 
 <br/><br/>
 
 ## **4.0 Formatting Data**
 
 Significance of good data in ML 
+
+<br/><br/>
 
 ### 4.1 Raw Data 
 
@@ -145,6 +147,8 @@ Usually has various inconsistencies that need to be resolved before moving on to
 - Inconsistencies in variable values 
 
 - Irrelevant feature variables 
+
+<br/><br/>
 
 ### 4.2 Data Preparation 
 
@@ -161,34 +165,53 @@ Usually has various inconsistencies that need to be resolved before moving on to
 - Feature engineering  
     libraries such as NumPy allow users to implement mathematical operations effortlessly and perform feature engineering efficiently  
 
-**Scaling** 
+- **Scaling** 
 
 In order to get the most accurate results from any given model, it's best to scale all data used to equal levels. There are several equations to rescale data, below follows one specific example in code.
 
-```py
-def MinMaxScaler(raw_data): # scales values of a list to between 0 and 1
+---
 
-    # finding xmax and xmin values for below equation
+<details>
+  <summary> Example Calculation </summary>
+  
+```py
+def scaling_function(raw_data): # scale values of a list to between 0 and 1
+
+    # store xmax and xmin values for below equation
     x_max = max(raw_data)
     x_min = min(raw_data)
 
-    # scaling data to between 0-1 using z = (x - xmin) / (xmax - xmin)
+    # scale data to between 0-1 using z = (x - xmin) / (xmax - xmin)
     scaled_data = [(x - x_min) / (x_max - x_min) for x in raw_data]
 
-    #scaled_data.sort()
     # return scaled data
     return scaled_data
 
 # raw data containing unscaled values
-fruit_weight = [15, 18, 12, 10]
-fruit_cost = [1, 2, 3, 5]
+meters_from_communal_transport = [15000, 18000, 12000, 10000]
+kilometers_from_communal_transport = [15, 18, 12, 10]
+amount_floors = [1, 2, 3, 5]
 
-# calling scaler function to get scaled values between 0 and 1 returned
-print(MinMaxScaler(fruit_weight))
-print(MinMaxScaler(fruit_cost))
+# calling scaling function to get scaled values between 0 and 1 returned and printing the results
+print(scaling_function(meters_from_communal_transport))
+print(scaling_function(kilometers_from_communal_transport))
+print(scaling_function(amount_floors))
 ```
+Above code snippet returns the following values:
 
-**Tools** 
+[0.625, 1.0, 0.25, 0.0]  
+[0.625, 1.0, 0.25, 0.0]  
+[0.0, 0.25, 0.5, 1.0]  
+
+</details>  
+
+---
+
+In this example, values are scaled to between 0 and 1 regardless of their initial values, such that smaller values like amount of floors affects the algorithm equally to larger values like distance to communal transport in meters.
+
+We also see that whether the distance from communal transport was measured in meters or kilometers in our dataset, we still get the same result after scaling.
+
+- **Tools** 
 
 As is shown in the above steps of data preparation, python is a good tool to utilize for analysing and preparing data for going into a machine learning algorithm. It can also be uesd to implement the machine learning models and work with those, and the output from them.  
 
@@ -202,11 +225,15 @@ SAP Data Intelligence Cloud
 
 ## **5.0 Visualizing and Using Output Data**
 
+<br/><br/>
+
 ### 5.1 Presenting Data 
 
 Text clustering 
 
 Network diagram 
+
+<br/><br/>
 
 ### 5.2 Importance of selecting the right data 
 
