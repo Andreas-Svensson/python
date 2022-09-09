@@ -18,8 +18,10 @@ Table of Contents
     4.2 Importance of Selecting the Right Data  
 5. Conclusion  
 
+<br/><br/>
+
 ## **1.0 Linear Regression**
----
+
 Definition 
 
 Linear regression is a machine learning algorithm which finds likeliness between two or more variables... 
@@ -47,37 +49,50 @@ In this example, the house price when selected variables living area, amount of 
 How much explanatory variables (X) adds to the target variable (Y)  
 In this example, how much the price is affected based on living area, amount of floors, etc
 
+<br/><br/>
 
 ### **1.2 Algorithm Usage** 
 
+Below follows an example of linear regression usage from [towardsdatascience](https://towardsdatascience.com/linear-regression-the-basics-4daad1aeb845), where the dependent variable (Y) is price, and explanatory variables (X*) are; living area (ft), floors, and year built 
 
+---
 <details>
-  <summary>Example from datascience</summary>
+  <summary> Example Calculation </summary>
   
 ```py
 **IN**:
 model3 = lm(price ~ sqft_living + floors + yr_built, data = data)
-summary(model3)**OUT**:
+summary(model3)
+
+**OUT**:
 Call:
-lm(formula = price ~ sqft_living + floors + yr_built, data = data)Residuals:
+lm(formula = price ~ sqft_living + floors + yr_built, data = data)
+
+Residuals:
      Min       1Q   Median       3Q      Max 
--1669759  -134816   -16331   102089  4092350Coefficients:
+-1669759  -134816   -16331   102089  4092350
+
+Coefficients:
               Estimate Std. Error t value Pr(>|t|)    
 (Intercept)  5.595e+06  1.304e+05   42.92   <2e-16 ***
 sqft_living  2.948e+02  2.018e+00  146.10   <2e-16 ***
 floors       7.517e+04  3.731e+03   20.15   <2e-16 ***
 yr_built    -2.933e+03  6.767e+01  -43.35   <2e-16 ***
 ---
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1Residual standard error: 250800 on 21609 degrees of freedom
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 250800 on 21609 degrees of freedom
 Multiple R-squared:  0.5335, Adjusted R-squared:  0.5334 
 F-statistic:  8237 on 3 and 21609 DF,  p-value: < 2.2e-16
 ```
 </details>
-Using the above example, we can read the following values: 
-<br/><br/><br/><br/>
-<br/><br/><br/><br/>
 
+---  
+
+Using the above example, we can read the following values: 
 <br/><br/>
+
+
 **r2 (R-squared)** - 0.5335  
 Describes how much of the target variable is explained by the model (from 0 to 1) 
 
@@ -93,6 +108,7 @@ The field "Estimate" gives us the a and b values, where Intercept is the a, and 
 **p-value** - 2.2e-16  
 Indicates confidence level of estimation
 
+<br/><br/>
 
 ## **3.0 Data Gathering** 
 
@@ -109,6 +125,8 @@ FiveThirtyEight
 data.world  
 
 If none of the above examples are sufficient, and you are able to generate data yourself, you can also make your own datasets based on generated data. This requires a case where data can be readily created and fed back into the algorithm by the application you are using.
+
+<br/><br/>
 
 ## **4.0 Formatting Data**
 
@@ -145,6 +163,8 @@ Usually has various inconsistencies that need to be resolved before moving on to
 
 **Scaling** 
 
+In order to get the most accurate results from any given model, it's best to scale all data used to equal levels. There are several equations to rescale data, below follows one specific example in code.
+
 ```py
 def MinMaxScaler(raw_data): # scales values of a list to between 0 and 1
 
@@ -178,8 +198,9 @@ Power BI
 Alteryx  
 SAP Data Intelligence Cloud 
 
+<br/><br/>
+
 ## **5.0 Visualizing and Using Output Data**
---- 
 
 ### 5.1 Presenting Data 
 
@@ -189,8 +210,9 @@ Network diagram
 
 ### 5.2 Importance of selecting the right data 
 
+<br/><br/>
+
 ## **6.0 Conclusion**
---- 
 
 Importance of being a good scientist 
 
