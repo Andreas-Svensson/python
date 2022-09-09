@@ -74,8 +74,10 @@ F-statistic:  8237 on 3 and 21609 DF,  p-value: < 2.2e-16
 ```
 </details>
 Using the above example, we can read the following values: 
-<br/><br/>
+<br/><br/><br/><br/>
+<br/><br/><br/><br/>
 
+<br/><br/>
 **r2 (R-squared)** - 0.5335  
 Describes how much of the target variable is explained by the model (from 0 to 1) 
 
