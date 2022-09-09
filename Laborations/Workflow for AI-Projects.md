@@ -2,7 +2,7 @@
 
 *Report by Andreas Svensson*
 
-This report explores a theoretical approach to AI-projects using the machine learning algorithm linear regression. In order to narrow the scope and reach a more easily understood explanation, a specific example of predicting house prices with the algorithm is used.
+This report explores a theoretical approach to AI-projects using the machine learning algorithm linear regression. To narrow the scope and reach a more easily understood explanation, a specific example of predicting house prices with the algorithm is used.
 
 <br/><br/>
 
@@ -17,15 +17,15 @@ The variable being predicted by the algorithm, house price in this example.
 
 **X\* = Explanatory variables**  
 Variable(s) x1, x2 ... attempting to "explain" the target variable (Y)  
-In this example it could be parameters such as living area, amount of floors, etc.  
+In this example it could be parameters such as living area, number of floors, etc.  
 
 **a = Baseline value**  
 Value of the target variable (Y) when explanatory variables (X*) are 0  
-In this example, the house price when selected variables living area, amount of floors, etc are 0. In other words, the price of a house without any features, the cheapest a house can possibly be.  
+In this example, the house price when selected variables living area, number of floors, etc. are 0. In other words, the price of a house without any features, the cheapest a house can be.  
 
 **b = Coefficient**  
-How much explanatory variables (X*) adds to the target variable (Y)  
-In this example, how much the price is affected based on living area, amount of floors, etc
+The amount explanatory variables (X*) adds to the target variable (Y)  
+In this example, how much the price is affected based on living area, number of floors, etc.
 
 <br/><br/>
 
@@ -73,14 +73,14 @@ Using the above example, we can read the following values:
 
 
 **r2 (R-squared)** - 0.5335  
-Describes how much of the target variable is explained by the model (from 0 to 1) 
+Describes how much of the target variable is explained by the model (from 0 to 1). 
 
 **Adjusted R-squared** - 0.5334  
 Should be used instead when multiple explanatory variables are used in the model.   
-In this case, our 3 explanatory variables explain roughly 53% of the house price  
+In this case, our 3 explanatory variables explain 53% of the house price.  
 
 **Residuals**  
-Describes how large the difference between actual y-levels of data points are, compared to the calculated regression line. Residual values should be as close to 0 as possible - low difference between the actual points and the points estimated by the algorithm. In below image you can see the calculation from *[khanacademy](https://www.khanacademy.org/math/ap-statistics/bivariate-data-ap/xfb5d8e68:residuals/v/regression-residual-intro)*  for a residual in one specific point.
+Describes how large the difference between actual y-levels of data points is, compared to the calculated regression line. Residual values should be as close to 0 as possible - low difference between the actual points and the points estimated by the algorithm. In the image below you can see the calculation from *[khanacademy](https://www.khanacademy.org/math/ap-statistics/bivariate-data-ap/xfb5d8e68:residuals/v/regression-residual-intro)*  for a residual in one specific point.
 
 <img src="assets/residuals_calculation.png"  width="50%" height="20%" />
 
@@ -89,7 +89,7 @@ The field "Estimate" gives us the a and b values, where "Intercept" is the a, an
 
 **p-value** - 2.2e-16  
 Indicates confidence level of estimation  
-The indicated confidence level can be calculated as 1 - p-value. In other words you want the p-value to be as low as possible, below 0.05 is generally considered statistically significant.
+The indicated confidence level can be calculated as 1 - p-value. In other words, you want the p-value to be as low as possible, below 0.05 is considered statistically significant.
 
 <br/><br/>
 
@@ -104,7 +104,7 @@ Otherwise, some commonly used places for finding datasets to use in machine lear
 - FiveThirtyEight  
 - data.world  
 
-If none of the above examples are sufficient, and you are able to generate data yourself, it is also possible to make your own datasets based on generated data. This requires a case where data can be readily created and fed back into the algorithm by the application you are using or by generating data from polls.
+If none of the above examples are sufficient, and you can generate data yourself, it is also possible to make your own datasets based on generated data. This requires a case where data can be readily created and fed back into the algorithm by the application you are using or by generating data from polls.
 
 <br/><br/>
 
@@ -119,13 +119,13 @@ Important things to look for are:
 - Inconsistencies in variable values 
 - Irrelevant feature variables 
 
-Anything that is out of place at a glance should be handled before moving into more thourough data preparation. Remove any unnecessary values and merge remaining data into files of a format that can be used later on (such as .csv).
+Anything that is immediately out of place should be handled before moving into more thorough data preparation. Remove any unnecessary values and merge remaining data into files of a format that can be used later (such as .csv).
 
 <br/><br/>
 
 ### **Data Preparation** 
 
-Once the data has been looked over, it is time to explore it more thouroughly and prepare it for use in our algorithm. This step includes:
+Once the data has been looked over, it is time to explore it more thoroughly and prepare it for use in our algorithm. This step includes:
 
 - Data transformation 
 - Exploratory data analysis  
@@ -135,7 +135,7 @@ Once the data has been looked over, it is time to explore it more thouroughly an
 
 ### **Scaling** 
 
-A part of feature engineering. In order to get the most accurate results from any given model, it's best to scale all data used to equal levels in order to now skew output results in favor of larger input values. There are several equations to rescale data, below follows one specific example in code.
+A part of feature engineering. To get the most accurate results from any given model, it is best to scale all data used to equal levels to not skew output results in favor of larger input values. There are several equations to rescale data, below follows one specific example in code.
 
 ---
 
@@ -175,13 +175,13 @@ Above code snippet returns the following values:
 
 ---
 
-In this example, values are scaled to between 0 and 1 regardless of their initial values, such that smaller values (amount of floors) affects the algorithm equally to larger values (distance to communal transport in meters).
+In this example, values are scaled to between 0 and 1 regardless of their initial values, such that smaller values (number of floors) affect the algorithm equally to larger values (distance to communal transport in meters).
 
 We also see that whether the distance from communal transport was measured in meters or kilometers in our dataset, we still get the same result after scaling.
 
 ### **Tools** 
 
-Python is a useful tool to utilize for analysing and preparing data for going into a machine learning algorithm since it has libraries to both process and present data(for analysing). It can also be uesd to implement the machine learning models and work with those, and the output from them.  
+Python is a useful tool to utilize for analysis and preparation of data going into a machine learning algorithm since it has libraries to both process and present data (for analysis). It can also be used to implement machine learning models and work with those, and the output from them.  
 
 Some other useful tools for data preparation are:  
 Tableau  
@@ -193,7 +193,7 @@ SAP Data Intelligence Cloud
 
 ## **Finalizing**
 
-At this stage, if there are results to be presented, they can be graphed out in a relevant manner as to emathise the points made. In our case, if we have done a sufficiently thorough job in handing our data, we now have a model ready to predict house prices based on new input variables!
+At this stage, if there are results to be presented, they can be graphed out in a relevant manner to further empathize the points made. In our case, if we have done a sufficiently thorough job in handing our data, we now have a model ready to predict house prices based on new input variables!
 
 <br/><br/>
 
