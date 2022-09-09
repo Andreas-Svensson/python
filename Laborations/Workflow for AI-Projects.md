@@ -55,7 +55,7 @@ In this example, how much the price is affected based on living area, amount of 
 
 ### **1.2 Algorithm Usage** 
 
-Below follows an example of linear regression usage from [towardsdatascience](https://towardsdatascience.com/linear-regression-the-basics-4daad1aeb845), where the dependent variable (Y) is price, and explanatory variables (X*) are; living area (ft), floors, and year built 
+Below follows an example of linear regression use, where the dependent variable (Y) is house price, and explanatory variables (X*) are; living area (ft), floors, and year built 
 
 ---
 <details>
@@ -87,6 +87,7 @@ Residual standard error: 250800 on 21609 degrees of freedom
 Multiple R-squared:  0.5335, Adjusted R-squared:  0.5334 
 F-statistic:  8237 on 3 and 21609 DF,  p-value: < 2.2e-16
 ```
+*Source [towardsdatascience](https://towardsdatascience.com/linear-regression-the-basics-4daad1aeb845)*  
 </details>
 
 ---  
@@ -99,75 +100,66 @@ Using the above example, we can read the following values:
 Describes how much of the target variable is explained by the model (from 0 to 1) 
 
 **Adjusted R-squared** - 0.5334  
-Should be used instead when multiple explanatory variables are used in the model 
+Should be used instead when multiple explanatory variables are used in the model.   
+In this case, our 3 explanatory variables explain roughly 53% of the house price  
 
 **Residuals**  
-TODO Include image for explanation 
+Is the difference between the actual y-value of a specific point measured, compared to the regression line's estimated line. Residual values should be as close to 0 as possible (low difference between the actual points and the points estimated by the algorithm). In below image you can see the calculation from *[khanacademy](https://www.khanacademy.org/math/ap-statistics/bivariate-data-ap/xfb5d8e68:residuals/v/regression-residual-intro)*  for a residual in one specific point.
+
+<img src="assets/residuals_calculation.png"  width="50%" height="20%" />
 
 **Coefficients**  
-The field "Estimate" gives us the a and b values, where Intercept is the a, and the explanatory variables is b(x*) 
+The field "Estimate" gives us the a and b values, where "Intercept" is the a, and the value of explanatory variables is b(x*) 
 
 **p-value** - 2.2e-16  
-Indicates confidence level of estimation
+Indicates confidence level of estimation  
+The indicated confidence level can be calculated as 1 - p-value. In other words you want the p-value to be as low as possible, below 0.05 is generally considered statistically significant.
 
 <br/><br/>
 
 ## **3.0 Data Gathering** 
 
-If you are employed by a company to solve a task, they might often have the data for you to use.  
-
+If you are employed by a company to solve an internal task, they often have the data for you to use.  
 Otherwise, some commonly used places for finding datasets to use in machine learning are:   
-Google dataset search  
-Kaggle  
-GitHub  
-Government sources  
-FiveThirtyEight  
-data.world  
+- Google dataset search  
+- Kaggle  
+- GitHub  
+- Government sources  
+- FiveThirtyEight  
+- data.world  
 
-If none of the above examples are sufficient, and you are able to generate data yourself, it is also possible to make your own datasets based on generated data. This requires a case where data can be readily created and fed back into the algorithm by the application you are using or by gathering data from polls.
+If none of the above examples are sufficient, and you are able to generate data yourself, it is also possible to make your own datasets based on generated data. This requires a case where data can be readily created and fed back into the algorithm by the application you are using or by generating data from polls.
 
 <br/><br/>
 
 ## **4.0 Formatting Data**
 
-Significance of good data in ML 
-
-<br/><br/>
-
-### 4.1 Raw Data 
-
-Usually has various inconsistencies that need to be resolved before moving on to the next step.
+Raw data usually has various inconsistencies that need to be resolved before moving on to the next step.  
+Important things to look for are:
 
 - Missing values 
-
 - Different file formats 
-
 - Outlying data points 
-
 - Inconsistencies in variable values 
-
 - Irrelevant feature variables 
+
+Anything that is out of place at a glance should be handled before moving into more thourough data preparation. Remove any unnecessary values and merge remaining data into files of a format that can be used later on (such as .csv).
 
 <br/><br/>
 
-### 4.2 Data Preparation 
+### **4.1 Data Preparation** 
+
+Once the data has been looked over, it is time to explore it more thouroughly and prepare it for use in our algorithm. This step includes:
 
 - Data transformation 
-
 - Exploratory data analysis  
-    Pandas, matplotlib, and seaborn Libraries  
-
 - Data cleaning  
-    Pandas, matplotlib, and seaborn Libraries  
-
 - Feature selection  
-
 - Feature engineering  
-    libraries such as NumPy allow users to implement mathematical operations effortlessly and perform feature engineering efficiently  
 
-- **Scaling** 
+### **4.2.1 Scaling** 
 
-In order to get the most accurate results from any given model, it's best to scale all data used to equal levels. There are several equations to rescale data, below follows one specific example in code.
+A part of feature engineering. In order to get the most accurate results from any given model, it's best to scale all data used to equal levels. There are several equations to rescale data, below follows one specific example in code.
 
 ---
 
@@ -211,9 +203,9 @@ In this example, values are scaled to between 0 and 1 regardless of their initia
 
 We also see that whether the distance from communal transport was measured in meters or kilometers in our dataset, we still get the same result after scaling.
 
-- **Tools** 
+### **4.2.2 Tools** 
 
-As is shown in the above steps of data preparation, python is a good tool to utilize for analysing and preparing data for going into a machine learning algorithm. It can also be uesd to implement the machine learning models and work with those, and the output from them.  
+Python is a useful tool to utilize for analysing and preparing data for going into a machine learning algorithm since it has libraries to both process and present data(for analysing). It can also be uesd to implement the machine learning models and work with those, and the output from them.  
 
 Some other useful tools for data preparation are:  
 Tableau  
@@ -223,24 +215,6 @@ SAP Data Intelligence Cloud
 
 <br/><br/>
 
-## **5.0 Visualizing and Using Output Data**
+## **5.0 Finalizing**
 
-<br/><br/>
-
-### 5.1 Presenting Data 
-
-Text clustering 
-
-Network diagram 
-
-<br/><br/>
-
-### 5.2 Importance of selecting the right data 
-
-<br/><br/>
-
-## **6.0 Conclusion**
-
-Importance of being a good scientist 
-
-Asking the right questions 
+At this stage, if there are results to be presented, they can be graphed out in a relevant manner as to emathise the points made. In our case, if we have done a sufficiently thorough job in handing our data, we now have a model ready to predict house prices based on new input variables! 
