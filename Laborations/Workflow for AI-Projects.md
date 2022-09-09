@@ -4,34 +4,10 @@
 
 This report explores a theoretical approach to AI-projects using the machine learning algorithm linear regression. In order to narrow the scope and reach a more easily understood explanation, a specific example of predicting house prices with the algorithm is used.
 
-Table of Contents
-
-1. Linear Regression to Predict House Prices  
-    1.1  Algorithm Explanation  
-    1.2  Algorithm Usage
-2. Data Gathering 
-3. Formatting Data  
-    3.1 Raw Data  
-    3.2 Data Preparation  
-4. Visualizing and Using Output Data  
-    4.1 Presenting Data  
-    4.2 Importance of Selecting the Right Data  
-5. Conclusion  
-
 <br/><br/>
 
-## **1.0 Linear Regression**
-
-Definition 
-
-Linear regression is a machine learning algorithm which finds likeliness between two or more variables... 
-
-Below follows a more general description which will later be used as a specific example to predict house prices. 
-
-<br/><br/>
-
-### **1.1 Algorithm Explanation** 
-The algorithm uses the following formula:  
+## **Algorithm Explanation** 
+Linear Regression uses the following formula:  
 
 **Y = a + bX\***
 
@@ -53,7 +29,7 @@ In this example, how much the price is affected based on living area, amount of 
 
 <br/><br/>
 
-### **1.2 Algorithm Usage** 
+## **Algorithm Usage** 
 
 Below follows an example of linear regression use, where the dependent variable (Y) is house price, and explanatory variables (X*) are; living area (ft), floors, and year built 
 
@@ -104,7 +80,7 @@ Should be used instead when multiple explanatory variables are used in the model
 In this case, our 3 explanatory variables explain roughly 53% of the house price  
 
 **Residuals**  
-Is the difference between the actual y-value of a specific point measured, compared to the regression line's estimated line. Residual values should be as close to 0 as possible (low difference between the actual points and the points estimated by the algorithm). In below image you can see the calculation from *[khanacademy](https://www.khanacademy.org/math/ap-statistics/bivariate-data-ap/xfb5d8e68:residuals/v/regression-residual-intro)*  for a residual in one specific point.
+Describes how large the difference between actual y-levels of data points are, compared to the calculated regression line. Residual values should be as close to 0 as possible - low difference between the actual points and the points estimated by the algorithm. In below image you can see the calculation from *[khanacademy](https://www.khanacademy.org/math/ap-statistics/bivariate-data-ap/xfb5d8e68:residuals/v/regression-residual-intro)*  for a residual in one specific point.
 
 <img src="assets/residuals_calculation.png"  width="50%" height="20%" />
 
@@ -117,7 +93,7 @@ The indicated confidence level can be calculated as 1 - p-value. In other words 
 
 <br/><br/>
 
-## **3.0 Data Gathering** 
+## **Data Gathering** 
 
 If you are employed by a company to solve an internal task, they often have the data for you to use.  
 Otherwise, some commonly used places for finding datasets to use in machine learning are:   
@@ -132,7 +108,7 @@ If none of the above examples are sufficient, and you are able to generate data 
 
 <br/><br/>
 
-## **4.0 Formatting Data**
+## **Formatting Data**
 
 Raw data usually has various inconsistencies that need to be resolved before moving on to the next step.  
 Important things to look for are:
@@ -147,7 +123,7 @@ Anything that is out of place at a glance should be handled before moving into m
 
 <br/><br/>
 
-### **4.1 Data Preparation** 
+### **Data Preparation** 
 
 Once the data has been looked over, it is time to explore it more thouroughly and prepare it for use in our algorithm. This step includes:
 
@@ -157,9 +133,9 @@ Once the data has been looked over, it is time to explore it more thouroughly an
 - Feature selection  
 - Feature engineering  
 
-### **4.2.1 Scaling** 
+### **Scaling** 
 
-A part of feature engineering. In order to get the most accurate results from any given model, it's best to scale all data used to equal levels. There are several equations to rescale data, below follows one specific example in code.
+A part of feature engineering. In order to get the most accurate results from any given model, it's best to scale all data used to equal levels in order to now skew output results in favor of larger input values. There are several equations to rescale data, below follows one specific example in code.
 
 ---
 
@@ -199,11 +175,11 @@ Above code snippet returns the following values:
 
 ---
 
-In this example, values are scaled to between 0 and 1 regardless of their initial values, such that smaller values like amount of floors affects the algorithm equally to larger values like distance to communal transport in meters.
+In this example, values are scaled to between 0 and 1 regardless of their initial values, such that smaller values (amount of floors) affects the algorithm equally to larger values (distance to communal transport in meters).
 
 We also see that whether the distance from communal transport was measured in meters or kilometers in our dataset, we still get the same result after scaling.
 
-### **4.2.2 Tools** 
+### **Tools** 
 
 Python is a useful tool to utilize for analysing and preparing data for going into a machine learning algorithm since it has libraries to both process and present data(for analysing). It can also be uesd to implement the machine learning models and work with those, and the output from them.  
 
@@ -215,6 +191,19 @@ SAP Data Intelligence Cloud
 
 <br/><br/>
 
-## **5.0 Finalizing**
+## **Finalizing**
 
-At this stage, if there are results to be presented, they can be graphed out in a relevant manner as to emathise the points made. In our case, if we have done a sufficiently thorough job in handing our data, we now have a model ready to predict house prices based on new input variables! 
+At this stage, if there are results to be presented, they can be graphed out in a relevant manner as to emathise the points made. In our case, if we have done a sufficiently thorough job in handing our data, we now have a model ready to predict house prices based on new input variables!
+
+<br/><br/>
+
+## **Sources**
+
+[yale - linear regression](http://www.stat.yale.edu/Courses/1997-98/101/linreg.htm#:~:text=A%20linear%20regression%20line%20has,y%20when%20x%20%3D%200)  
+[towardsdatascience - linear regression basics](https://towardsdatascience.com/linear-regression-the-basics-4daad1aeb845)  
+[towardsdatascience - feature scaling](https://towardsdatascience.com/all-about-feature-scaling-bcc0ad75cb35)  
+[projectpro - data preparation for machine learning](https://www.projectpro.io/article/data-preparation-for-machine-learning/595)  
+[chartio - where to find free datasets and how to know if they are good quality](https://chartio.com/learn/data-analytics/where-to-find-free-datasets/)  
+[khanacademy - regression residuals](https://www.khanacademy.org/math/ap-statistics/bivariate-data-ap/xfb5d8e68:residuals/v/regression-residual-intro)  
+[baeldung - batch normalization](https://www.baeldung.com/cs/batch-normalization-cnn#normalization)  
+[baeldung - normalization vs standardization](https://www.baeldung.com/cs/normalization-vs-standardization)  
