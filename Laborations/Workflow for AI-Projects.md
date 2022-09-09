@@ -171,6 +171,7 @@ Above code snippet returns the following values:
 [0.625, 1.0, 0.25, 0.0]  
 [0.0, 0.25, 0.5, 1.0]  
 
+*Source [myself](https://github.com/Andreas-Svensson/Portfolio-Andreas-Svensson)* 
 </details>  
 
 ---
