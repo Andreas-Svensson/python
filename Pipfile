@@ -7,6 +7,7 @@ name = "pypi"
 ipykernel = "*"
 matplotlib = "*"
 black = "*"
+pygame = "*"
 
 [dev-packages]
 
