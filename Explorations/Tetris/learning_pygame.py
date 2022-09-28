@@ -3,16 +3,21 @@
 import sys, pygame
 pygame.init()
 
-size = width, height = 320, 240
-speed = [2, 2]
+size = width, height = 720, 480
+speed = [4, 3]
 black = 0, 0, 0
 
 screen = pygame.display.set_mode(size)
 
-ball = pygame.image.load("intro_ball.gif")
+# NOTE: in future: use os.path.join to build path and concatenate with relative file path
+
+ball = pygame.image.load("c:/GitHub/Python-Andreas-Svensson/Explorations/Tetris/assets/intro_ball.gif")
 ballrect = ball.get_rect()
 
 while 1:
+    # create a delay of 10 ms
+    pygame.time.delay(10)
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT: sys.exit()
 
