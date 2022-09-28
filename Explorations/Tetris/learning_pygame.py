@@ -24,7 +24,7 @@ shape_height = 30
 vel = 30 # change factor of velocity for input move commands
 
 while 1:
-    pygame.time.delay(100) # set a delay of n ms
+    pygame.time.delay(10) # set a delay of n ms
 
     # ----- events -----
     events = pygame.event.get()
