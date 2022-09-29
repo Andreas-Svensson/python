@@ -15,10 +15,10 @@ L = Shape(np.array(([0, 0, 1], [1, 1, 1], [0, 0, 0]))) # L-shape
 S = Shape(np.array(([0, 1, 1], [1, 1, 0], [0, 0, 0]))) # S-shape
 Z = Shape(np.array(([1, 1, 0], [0, 1, 1], [0, 0, 0]))) # Z-shape
 
-print(I)
-print(O)
-print(T)
-print(J)
-print(L)
-print(S)
-print(Z)
+print("I-" + str(I))
+print("O-" + str(O))
+print("T-" + str(T))
+print("J-" + str(J))
+print("L-" + str(L))
+print("S-" + str(S))
+print("Z-" + str(Z))
