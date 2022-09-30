@@ -1,10 +1,11 @@
 """Code from introduction page on pygame"""
 
+from shutil import move
 import sys, pygame
 import numpy as np
 pygame.init()
 
-size = width, height = 350, 700 # window size
+size = width, height = 900, 700 # window size
 black = 0, 0, 0 # background color
 gray = 100, 100, 100 # shape color
 
@@ -62,6 +63,6 @@ while 1:
     #screen.blit(screen, pygame.draw.rect(screen, gray, square)) # NOTE: Drawing test rect on screen
     x, y = np.where(shape == 1)
     for a, b in zip(x, y):
-        pygame.draw.rect(screen, gray, (x_pos + a, y_pos + b, shape_width, shape_height))
+        pygame.draw.rect(screen, gray, (x_pos + (a * move_distance), y_pos + (b * move_distance), shape_width, shape_height))
 
     pygame.display.flip()
