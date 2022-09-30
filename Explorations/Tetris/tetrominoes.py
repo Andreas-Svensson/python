@@ -22,3 +22,11 @@ print("J-" + str(J))
 print("L-" + str(L))
 print("S-" + str(S))
 print("Z-" + str(Z))
+
+for i in I.shape:
+    print(i)
+
+print(I.shape[I.shape>0])
+
+x, y = np.where(I.shape == 1)
+print(x, y)
