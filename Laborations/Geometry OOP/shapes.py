@@ -41,11 +41,40 @@ class Shape: # super class of geometrical shapes
         return value # if all checks have been passed
 
     # ----- Operator overloading for Shape class -----
-    # TODO __eq__
-    # TODO __lt__
-    # TODO __gt__
-    # TODO __le__
-    # TODO __ge__
+    def __eq__(self, other: Shape) -> bool:
+        """Override of equal (==) operator for all shapes"""
+        if isinstance(other, type(self)): # if same class
+            return self.x_pos == other.x_pos # and same x_pos (TODO: later will be area when implemented)
+        else:
+            return False
+
+    def __lt__(self, other: Shape) -> bool:
+        """Override of lesser than (<) operator for all shapes"""
+        if isinstance(other, type(self)): # if same class
+            return self.x_pos < other.x_pos # and same x_pos (TODO: later will be area when implemented)
+        else:
+            return False
+            
+    def __gt__(self, other: Shape) -> bool:
+        """Override of greater than (>) operator for all shapes"""
+        if isinstance(other, type(self)): # if same class
+            return self.x_pos > other.x_pos # and same x_pos (TODO: later will be area when implemented)
+        else:
+            return False
+
+    def __le__(self, other: Shape) -> bool:
+        """Override of lesser or equal (<=) operator for all shapes"""
+        if isinstance(other, type(self)): # if same class
+            return self.x_pos <= other.x_pos # and same x_pos (TODO: later will be area when implemented)
+        else:
+            return False
+
+    def __ge__(self, other: Shape) -> bool:
+        """Override of greater or equal (>=) operator for all shapes"""
+        if isinstance(other, type(self)): # if same class
+            return self.x_pos >= other.x_pos # and same x_pos (TODO: later will be area when implemented)
+        else:
+            return False
 
     # ----- String representation -----
     # TODO __repr__
