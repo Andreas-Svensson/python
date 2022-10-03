@@ -28,13 +28,13 @@ class Shape: # super class of geometrical shapes
     # ----- Error handling -----
     def check_coordinate(self, value: (int | float)) -> (int | float):
         """Error handling method for all coordinate values"""
-        if isinstance(value) != (int, float): # value is not int or float:
+        if not isinstance(value, (int, float)): # value is not int or float:
             raise TypeError(f"Coordinate must be a number, not {type(value)}")
         return value # if all checks have been passed
 
     def check_measurement(self, value: (int | float)) -> (int | float):
         """Error handling method for all measurement values"""
-        if isinstance(value) != (int, float): # value is not int or float:
+        if not isinstance(value, (int, float)): # value is not int or float:
             raise TypeError(f"Measurement must be a number, not {type(value)}")
         if value <= 0: # value is not greater than 0:
             raise ValueError(f"Value must be over 0, not {value}")

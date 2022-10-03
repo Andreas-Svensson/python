@@ -23,9 +23,12 @@ class TestCircle(unittest.TestCase): # TestCircle sub-class of TestCase
         return Circle(self.r, self.x, self.y)
 
     # ----- Example Tests -----
-    # def test_create_circle(self):
-    #     c = self.create_circle()
-    #     self.assertEqual(c.radius, self.r) # returns OK if c.radius == 2, else returns FAILED
+    def test_create_circle(self):
+        """Testing if Circle instance is created with expected values"""
+        c = self.create_circle()
+        self.assertEqual(c.radius,  self.r)
+        self.assertEqual(c.x_pos,   self.x)
+        self.assertEqual(c.y_pos,   self.y)
 
     # def test_equal_circle(self):
     #     c1 = self.create_circle()
