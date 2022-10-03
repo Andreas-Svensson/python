@@ -12,23 +12,23 @@ sys.path.append(path_to_vector_module)
 
 from shapes import *
 
-class TestCircle(unittest.TestCase): # TestCircle sub-class of TestCase
+# class TestCircle(unittest.TestCase): # TestCircle sub-class of TestCase
 
-    # ----- Attributes used later on, to avoid repeating -----
-    def setUp(self):
-        self.r, self.x, self.y = 2, 3, 4 # TODO go through variety of values to test
+#     # ----- Attributes used later on, to avoid repeating -----
+#     def setUp(self):
+#         self.r, self.x, self.y = 2, 3, 4 # TODO go through variety of values to test
 
-    # ----- Default shape for unit testing -----
-    def create_circle(self) -> Circle:
-        return Circle(self.r, self.x, self.y)
+#     # ----- Default shape for unit testing -----
+#     def create_circle(self) -> Circle:
+#         return Circle(self.r, self.x, self.y)
 
-    # ----- Example Tests -----
-    def test_create_circle(self):
-        """Testing if Circle instance is created with expected values"""
-        c = self.create_circle()
-        self.assertEqual(c.radius,  self.r)
-        self.assertEqual(c.x_pos,   self.x)
-        self.assertEqual(c.y_pos,   self.y)
+#     # ----- Example Tests -----
+#     def test_create_circle(self):
+#         """Testing if Circle instance is created with expected values"""
+#         c = self.create_circle()
+#         self.assertEqual(c.radius,  self.r)
+#         self.assertEqual(c.x_pos,   self.x)
+#         self.assertEqual(c.y_pos,   self.y)
 
     # def test_equal_circle(self):
     #     c1 = self.create_circle()
@@ -42,33 +42,63 @@ class TestCircle(unittest.TestCase): # TestCircle sub-class of TestCase
 
     # ----- Tests to run -----
 
-    # TODO class for Circle checks
-        # TODO attributes # including negative, none, float, string
-        # TODO create_self
-        
-        # ----- Tests -----
-        # comparisons of radius, xpos, ypos, area, circumference:
-        # TODO check equality
-        # TODO check lesser than
-        # TODO check greater than
-        # TODO check lesser or equal
-        # TODO check greater or equal
+class TestCircle(unittest.TestCase): # TestCircle sub-class of TestCase
 
-        # methods:
-        # TODO check calc_area
-        # TODO check calc_circum
-        # TODO check translocate
-        # TODO check contains_point
-        # TODO check is_circle
+    # ----- Attributes used later on, to avoid repeating -----
+    def setUp(self):
+        self.r, self.x, self.y = 2, 3, 4 # TODO go through variety of values to test
 
-    # TODO class for Rectangle checks
-        # equivalent checks here, including width and height
+    # ----- Default shape for unit testing -----
+    def create_circle(self) -> Circle:
+        """Default Circle for unit testing"""
+        return Circle(self.r, self.x, self.y)
 
-    # TODO class for Sphere checks
-        # equivalent checks here, including zpos and volume
+    # ----- Tests -----
+    # creation of shape with expected values:
+    def test_create_circle(self):
+        """Testing if Circle instance is created with expected values"""
+        c = self.create_circle()
+        self.assertEqual(c.radius,  self.r)
+        self.assertEqual(c.x_pos,   self.x)
+        self.assertEqual(c.y_pos,   self.y)
+    
+    def test_create_circle_empty(self):
+        c = Circle()
 
-    # TODO class for Cuboid checks
-        # equivalent checks here, including width, height, length, and volume
+    # creation of shape with invalid parameters:
+    def test_create_circle_string(self): # TODO is there a way to do this for more values without manually typing all of them out?
+        """Testing if creating Circle with string parameter raises TypeError"""
+        self.assertRaises(TypeError, Circle, "1", 1, 1)
+        self.assertRaises(TypeError, Circle, 1, "1", 1)
+        self.assertRaises(TypeError, Circle, 1, 1, "1")
+    
+    def test_create_circle_negative(self):
+        """Testing if creating Circle with invalid measurement raises ValueError"""
+        self.assertRaises(ValueError, Circle, 0, 1, 1)
+        self.assertRaises(ValueError, Circle, -1, 1, 1)
+
+    # comparisons of radius, xpos, ypos, area, circumference:
+    # TODO check equality
+    # TODO check lesser than
+    # TODO check greater than
+    # TODO check lesser or equal
+    # TODO check greater or equal
+
+    # methods:
+    # TODO check calc_area
+    # TODO check calc_circum
+    # TODO check translocate
+    # TODO check contains_point
+    # TODO check is_circle
+
+# TODO class for Rectangle checks
+    # equivalent checks here, including width and height
+
+# TODO class for Sphere checks
+    # equivalent checks here, including zpos and volume
+
+# TODO class for Cuboid checks
+    # equivalent checks here, including width, height, length, and volume
 
 if __name__ == "__main__": # use this as boilerplate code for now, will go through at some other point
     unittest.main()
