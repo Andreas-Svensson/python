@@ -9,15 +9,36 @@ class Shape: # super class of geometrical shapes
         self.y_pos = y_pos # y-coordinate of shape, default 0
     
     # ----- Properties -----
-    # TODO @property
-    # TODO @x_pos.setter # containing error handling
+    @property
+    def x_pos(self):
+        return self._x_pos
+    
+    @x_pos.setter
+    def x_pos(self, value: (int | float)) -> (int | float):
+        self._x_pos = self.check_coordinate(value) # error handling through check_coordinate method
 
-    # TODO @property
-    # TODO @y_pos.setter # containing error handling
+    @property
+    def y_pos(self):
+        return self._y_pos
+    
+    @y_pos.setter
+    def y_pos(self, value: (int | float)) -> (int | float):
+        self._y_pos = self.check_coordinate(value) # error handling through check_coordinate method
 
     # ----- Error handling -----
-    # TODO check_coordinate # error handling method for all coordinates
-    # TODO check_measurement # error handling method for all measurements
+    def check_coordinate(self, value: (int | float)) -> (int | float):
+        """Error handling method for all coordinate values"""
+        if isinstance(value) != (int, float): # value is not int or float:
+            raise TypeError(f"Coordinate must be a number, not {type(value)}")
+        return value # if all checks have been passed
+
+    def check_measurement(self, value: (int | float)) -> (int | float):
+        """Error handling method for all measurement values"""
+        if isinstance(value) != (int, float): # value is not int or float:
+            raise TypeError(f"Measurement must be a number, not {type(value)}")
+        if value <= 0: # value is not greater than 0:
+            raise ValueError(f"Value must be over 0, not {value}")
+        return value # if all checks have been passed
 
     # ----- Operator overloading for Shape class -----
     # TODO __eq__
