@@ -103,6 +103,13 @@ class Circle(Shape): # sub-class inheriting from Shape
 
     # ----- Methods -----
     # TODO is_unit_circle
+    def is_unit_circle(self) -> bool:
+        """Checks if Circle is a unit circle (circle with radius 1 centered in origo)"""
+        if self.radius == 1 and self.x_pos == 0 and self.y_pos == 0:
+            return True
+        else:
+            return False
+            
     # TODO calculate_area
     # TODO calculate_circumference
     # TODO move_to

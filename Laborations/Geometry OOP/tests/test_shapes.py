@@ -93,11 +93,22 @@ class TestCircle(unittest.TestCase): # TestCircle sub-class of TestCase
         self.assertGreaterEqual(c, c_lesser)
 
     # methods:
+    # TODO check is_circle
+    def test_is_unit_circle(self):
+        """Testing if circle is unit circle (circle with radius 1 centered in origo)"""
+        c = self.create_circle()
+        c1 = Circle(1, 0, 0)
+        c2 = Circle(2, 0, 0)
+        c3 = Circle(1, 0, 1)
+
+        self.assertFalse(c.is_unit_circle())
+        self.assertTrue(c1.is_unit_circle()) # is unit circle
+        self.assertFalse(c2.is_unit_circle())
+        self.assertFalse(c3.is_unit_circle())
     # TODO check calc_area
     # TODO check calc_circum
     # TODO check translocate
     # TODO check contains_point
-    # TODO check is_circle
 
 # TODO class for Rectangle checks
     # equivalent checks here, including width and height
