@@ -4,7 +4,7 @@ import sys, pygame
 import numpy as np
 pygame.init()
 
-size = width, height = 300, 600 # window size
+size = width, height = 350, 700 # window size
 black = 0, 0, 0 # background color
 gray = 100, 100, 100 # shape color
 
@@ -32,8 +32,8 @@ L = Shape(np.array(([0, 0, 1], [1, 1, 1], [0, 0, 0])), color = (255, 170, 0)) # 
 S = Shape(np.array(([0, 1, 1], [1, 1, 0], [0, 0, 0])), color = (0, 255, 0)) # S-shape
 Z = Shape(np.array(([1, 1, 0], [0, 1, 1], [0, 0, 0])), color = (255, 0, 0)) # Z-shape
 
-tetromino = O
-# ----- position and velocity variables -----
+tetrominoes = [I, O, T, J, L, S, Z]
+tetromino = tetrominoes[np.random.randint(1, len(tetrominoes))]
 
 while 1:
     # pygame.time.delay(10) # set a delay of n ms
