@@ -1,11 +1,10 @@
-"""Code from introduction page on pygame"""
-
+from tetrominoes import Shape
 from shutil import move
 import sys, pygame
 import numpy as np
 pygame.init()
 
-size = width, height = 900, 700 # window size
+size = width, height = 300, 600 # window size
 black = 0, 0, 0 # background color
 gray = 100, 100, 100 # shape color
 
@@ -25,15 +24,15 @@ y_pos = 0 # starting pos of shape
 shape_width = 35
 shape_height = 35
 
-I = np.array(([0, 0, 0, 0], [1, 1, 1, 1], [0, 0, 0, 0], [0, 0, 0, 0])) # I-shape
-O = np.array(([0, 1, 1, 0], [0, 1, 1, 0], [0, 0, 0, 0], [0, 0, 0, 0])) # O-shape
-T = np.array(([0, 1, 0], [1, 1, 1], [0, 0, 0])) # T-shape
-J = np.array(([1, 0, 0], [1, 1, 1], [0, 0, 0])) # J-shape
-L = np.array(([0, 0, 1], [1, 1, 1], [0, 0, 0])) # L-shape
-S = np.array(([0, 1, 1], [1, 1, 0], [0, 0, 0])) # S-shape
-Z = np.array(([1, 1, 0], [0, 1, 1], [0, 0, 0])) # Z-shape
+I = Shape(np.array(([0, 0, 0, 0], [1, 1, 1, 1], [0, 0, 0, 0], [0, 0, 0, 0])), color = (0, 255, 255)) # I-shape
+O = Shape(np.array(([0, 1, 1, 0], [0, 1, 1, 0], [0, 0, 0, 0], [0, 0, 0, 0])), color = (255, 255, 0)) # O-shape
+T = Shape(np.array(([0, 1, 0], [1, 1, 1], [0, 0, 0])), color = (153, 0, 255)) # T-shape
+J = Shape(np.array(([1, 0, 0], [1, 1, 1], [0, 0, 0])), color = (0, 0, 255)) # J-shape
+L = Shape(np.array(([0, 0, 1], [1, 1, 1], [0, 0, 0])), color = (255, 170, 0)) # L-shape
+S = Shape(np.array(([0, 1, 1], [1, 1, 0], [0, 0, 0])), color = (0, 255, 0)) # S-shape
+Z = Shape(np.array(([1, 1, 0], [0, 1, 1], [0, 0, 0])), color = (255, 0, 0)) # Z-shape
 
-shape = I
+tetromino = O
 # ----- position and velocity variables -----
 
 while 1:
@@ -61,8 +60,8 @@ while 1:
     screen.fill(black)
 
     #screen.blit(screen, pygame.draw.rect(screen, gray, square)) # NOTE: Drawing test rect on screen
-    x, y = np.where(shape == 1)
+    x, y = np.where(tetromino.shape == 1)
     for a, b in zip(x, y):
-        pygame.draw.rect(screen, gray, (x_pos + (a * move_distance), y_pos + (b * move_distance), shape_width, shape_height))
+        pygame.draw.rect(screen, tetromino.color, (x_pos + (a * move_distance), y_pos + (b * move_distance), shape_width, shape_height))
 
     pygame.display.flip()
