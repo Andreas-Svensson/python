@@ -77,8 +77,11 @@ class Shape: # super class of geometrical shapes
             return False
 
     # ----- String representation -----
-    # TODO __repr__
-    # TODO __str__
+    def __repr__(self) -> str:
+        return f"Shape(x_pos = {self.x_pos}, y_pos = {self.y_pos})"
+
+    def __str__(self) -> str:
+        return f"Shape with x: {self.x_pos}, y: {self.y_pos}"
 
 class Circle(Shape): # sub-class inheriting from Shape
     """Class for geometrical shapes of type Circle, sub-class of Shape"""
