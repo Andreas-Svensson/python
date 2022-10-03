@@ -10,7 +10,7 @@ class Shape: # super class of geometrical shapes
     
     # ----- Properties -----
     @property
-    def x_pos(self):
+    def x_pos(self) -> (int | float):
         return self._x_pos
     
     @x_pos.setter
@@ -18,7 +18,7 @@ class Shape: # super class of geometrical shapes
         self._x_pos = self.check_coordinate(value) # error handling through check_coordinate method
 
     @property
-    def y_pos(self):
+    def y_pos(self) -> (int | float):
         return self._y_pos
     
     @y_pos.setter
@@ -61,8 +61,13 @@ class Circle(Shape): # sub-class inheriting from Shape
         self.radius = radius # radius of circle, default 1
 
     # ----- Properties -----
-    # TODO @property
-    # TODO @radius.setter # containing error handling
+    @property
+    def radius(self) -> (int | float):
+        return self._radius
+
+    @radius.setter
+    def radius(self, value: (int | float)) -> (int | float):
+        self._radius = self.check_measurement(value)  # error handling through check_measurement method
 
     # ----- Methods -----
     # TODO is_unit_circle
