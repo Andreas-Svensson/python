@@ -43,6 +43,7 @@ while 1:
     for event in events:
         if event.type == pygame.QUIT: sys.exit() # exit if exit
 
+        # ----- Movement -----
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT and x_pos - move_distance >= 0:
                 x_pos -= move_distance
@@ -53,6 +54,10 @@ while 1:
 
             if event.key == pygame.K_DOWN and y_pos + move_distance < height:
                 y_pos += move_distance
+            
+            if event.key == pygame.K_SPACE:
+                pass
+                # shape.place()
 
             # ----- Rotation -----
             if event.key == pygame.K_UP or event.key == pygame.K_x:
