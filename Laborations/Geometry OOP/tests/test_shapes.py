@@ -1,6 +1,7 @@
 from __future__ import annotations
 import sys, os
 import unittest # for code at bottom of file
+from math import pi
 
 # change directory to where this file is
 os.chdir(os.path.dirname(__file__))
@@ -124,7 +125,13 @@ class TestCircle(unittest.TestCase): # TestCircle sub-class of TestCase
         self.assertTrue(c1.is_unit_circle()) # is unit circle
         self.assertFalse(c2.is_unit_circle())
         self.assertFalse(c3.is_unit_circle())
+
     # TODO check calc_area
+    def test_calculate_area(self):
+        """Testing if area of circle is calculated correctly"""
+        c = self.create_circle()
+        self.assertEqual(c.calculate_area(), (pi * self.r ** 2))
+
     # TODO check calc_circum
     # TODO check translocate
     # TODO check contains_point

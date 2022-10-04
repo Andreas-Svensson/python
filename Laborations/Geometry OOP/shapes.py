@@ -1,4 +1,5 @@
 from __future__ import annotations # for type hinting with classes and |-operators
+from math import pi
 
 class Shape: # super class of geometrical shapes
     """Super class of geometrical shapes: Circle, Rectangle, Sphere, Cuboid"""
@@ -111,6 +112,11 @@ class Circle(Shape): # sub-class inheriting from Shape
             return False
             
     # TODO calculate_area
+    def calculate_area(self) -> float:
+        """Calculates area of circle"""
+        area = pi * self.radius ** 2
+        return area
+        
     # TODO calculate_circumference
     # TODO move_to
     # TODO contains_point
