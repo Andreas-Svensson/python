@@ -103,21 +103,24 @@ class Circle(Shape): # sub-class inheriting from Shape
         self._radius = self.check_measurement(value)  # error handling through check_measurement method
 
     # ----- Methods -----
-    # TODO is_unit_circle
     def is_unit_circle(self) -> bool:
         """Checks if Circle is a unit circle (circle with radius 1 centered in origo)"""
         if self.radius == 1 and self.x_pos == 0 and self.y_pos == 0:
             return True
         else:
             return False
-            
-    # TODO calculate_area
+
     def calculate_area(self) -> float:
         """Calculates area of circle"""
         area = pi * self.radius ** 2
         return area
-        
+
     # TODO calculate_circumference
+    def calculate_circumference(self) -> float:
+        """Calculates circumference of circle"""
+        area = 2 * pi * self.radius
+        return area
+        
     # TODO move_to
     # TODO contains_point
     # TODO plot

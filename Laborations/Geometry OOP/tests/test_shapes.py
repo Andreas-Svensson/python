@@ -133,6 +133,11 @@ class TestCircle(unittest.TestCase): # TestCircle sub-class of TestCase
         self.assertEqual(c.calculate_area(), (pi * self.r ** 2))
 
     # TODO check calc_circum
+    def test_calculate_circumference(self):
+        """Testing if circumference of circle is calculated correctly"""
+        c = self.create_circle()
+        self.assertEqual(c.calculate_circumference(), (2 * pi * self.r))
+
     # TODO check translocate
     # TODO check contains_point
 
