@@ -1,5 +1,5 @@
 from __future__ import annotations # for type hinting with classes and |-operators
-from math import pi
+from math import pi, dist
 
 class Shape: # super class of geometrical shapes
     """Super class of geometrical shapes: Circle, Rectangle, Sphere, Cuboid"""
@@ -126,6 +126,15 @@ class Circle(Shape): # sub-class inheriting from Shape
         return area
 
     # TODO contains_point
+    def contains_point(self, x, y) -> bool:
+        """Check if circle contains a given point"""
+        distance = dist((self.x_pos, self.y_pos), (x, y)) # calculate euclid distance between center of self and input point
+        print(f"Distance between {x},{y} and {self.x_pos},{self.y_pos} is {distance}, radius is {self.radius}")
+        if distance <= self.radius: # if distance to imput point is less than radius:
+            return True # point is within circle
+        else:
+            return False # point is outside circle
+
     # TODO plot
 
     # ----- String representation -----

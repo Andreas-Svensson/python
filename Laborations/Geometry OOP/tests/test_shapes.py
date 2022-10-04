@@ -31,7 +31,7 @@ class TestCircle(unittest.TestCase): # TestCircle sub-class of TestCase
     
     def create_large_circle(self) -> Circle:
         """Creates a circle with all parameters larger than default one, for unit testing"""
-        return Circle(self.r +2, self.x + 2, self.y + 2)
+        return Circle(self.r + 2, self.x + 2, self.y + 2)
 
     # ----- Tests -----
     # test creation of shape with expected values:
@@ -143,6 +143,20 @@ class TestCircle(unittest.TestCase): # TestCircle sub-class of TestCase
         self.assertEqual((c.x_pos, c.y_pos), (2, 2))
 
     # TODO check contains_point
+    def test_contains_point(self):
+        """Testing if contains_point correctly checks for circle containing given point"""
+        c = self.create_circle()
+        self.assertTrue(c.contains_point(self.x, self.y)) # x, y
+        # radius distance units from center of circle:
+        self.assertTrue(c.contains_point(self.x + self.r, self.y)) # x + r
+        self.assertTrue(c.contains_point(self.x, self.y + self.r)) # y + r
+        self.assertTrue(c.contains_point(self.x - self.r, self.y)) # x - r
+        self.assertTrue(c.contains_point(self.x, self.y - self.r)) # y - r
+        # radius + 1 distance units from center of circle:
+        self.assertFalse(c.contains_point(self.x + self.r + 1, self.y)) # x + r + 1
+        self.assertFalse(c.contains_point(self.x, self.y + self.r + 1)) # y + r + 1
+        self.assertFalse(c.contains_point(self.x - self.r - 1, self.y)) # x - r - 1
+        self.assertFalse(c.contains_point(self.x, self.y - self.r - 1)) # y - r - 1
 
 # TODO class for Rectangle checks
     # equivalent checks here, including width and height
