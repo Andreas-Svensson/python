@@ -77,6 +77,11 @@ class Shape: # super class of geometrical shapes
         else:
             return False
 
+    # ----- Other methods -----
+    def move_to(self, x: (int | float) = 0, y: (int | float) = 0) -> None: # TODO move to relative point rather than absolute?
+        self.x_pos = x
+        self.y_pos = y
+
     # ----- String representation -----
     def __repr__(self) -> str:
         return f"Shape(x_pos = {self.x_pos}, y_pos = {self.y_pos})"
@@ -115,13 +120,11 @@ class Circle(Shape): # sub-class inheriting from Shape
         area = pi * self.radius ** 2
         return area
 
-    # TODO calculate_circumference
     def calculate_circumference(self) -> float:
         """Calculates circumference of circle"""
         area = 2 * pi * self.radius
         return area
-        
-    # TODO move_to
+
     # TODO contains_point
     # TODO plot
 
@@ -153,7 +156,6 @@ class Rectangle(Shape): # sub-class inheriting from Shape
     # TODO is_square
     # TODO calculate_area
     # TODO calculate_circumference
-    # TODO move_to
     # TODO contains_point
     # TODO plot
 
@@ -187,7 +189,7 @@ class Sphere(Shape): # sub-class inheriting from Shape
     # TODO calculate_area
     # TODO calculate_circumference
     # TODO calculate volume
-    # TODO move_to
+    # TODO override move_to -> super move to x, y
     # TODO contains_point
     # TODO plot
 
@@ -231,7 +233,7 @@ class Cuboid(Shape): # sub-class inheriting from Shape
     # TODO calculate_area
     # TODO calculate_circumference
     # TODO calculate volume
-    # TODO move_to
+    # TODO override move_to -> super move to x, y
     # TODO contains_point
     # TODO plot
 

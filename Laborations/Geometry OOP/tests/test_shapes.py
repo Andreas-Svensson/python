@@ -126,19 +126,22 @@ class TestCircle(unittest.TestCase): # TestCircle sub-class of TestCase
         self.assertFalse(c2.is_unit_circle())
         self.assertFalse(c3.is_unit_circle())
 
-    # TODO check calc_area
     def test_calculate_area(self):
         """Testing if area of circle is calculated correctly"""
         c = self.create_circle()
         self.assertEqual(c.calculate_area(), (pi * self.r ** 2))
 
-    # TODO check calc_circum
     def test_calculate_circumference(self):
         """Testing if circumference of circle is calculated correctly"""
         c = self.create_circle()
         self.assertEqual(c.calculate_circumference(), (2 * pi * self.r))
 
-    # TODO check translocate
+    def test_move_to(self):
+        """Testing if move_to (x,y) works as expected"""
+        c = self.create_circle()
+        c.move_to(2, 2)
+        self.assertEqual((c.x_pos, c.y_pos), (2, 2))
+
     # TODO check contains_point
 
 # TODO class for Rectangle checks
