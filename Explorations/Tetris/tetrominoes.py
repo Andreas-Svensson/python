@@ -7,6 +7,12 @@ class Shape:
     
     def __repr__(self):
         return f"shape({self.shape=}, {self.color=}"
+    
+    def rotate_clockwise(self):
+        self.shape = np.rot90(self.shape, 3) # rotates 90* counter clockwise 3 times
+
+    def rotate_counter_clockwise(self):
+        self.shape = np.rot90(self.shape)
 
 I = Shape(np.array(([0, 0, 0, 0], [1, 1, 1, 1], [0, 0, 0, 0], [0, 0, 0, 0])), color = (0, 255, 255)) # I-shape
 O = Shape(np.array(([0, 1, 1, 0], [0, 1, 1, 0], [0, 0, 0, 0], [0, 0, 0, 0])), color = (255, 255, 0)) # O-shape
