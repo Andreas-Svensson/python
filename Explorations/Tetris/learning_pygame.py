@@ -46,20 +46,24 @@ while 1:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT and x_pos - move_distance >= 0:
                 x_pos -= move_distance
+                # shape.move(move_distance)
 
             if event.key == pygame.K_RIGHT and x_pos + move_distance < width:
                 x_pos += move_distance
 
-            if event.key == pygame.K_UP and y_pos - move_distance >= 0:
-                y_pos -= move_distance
-
             if event.key == pygame.K_DOWN and y_pos + move_distance < height:
                 y_pos += move_distance
+
+            # ----- Rotation -----
+            if event.key == pygame.K_UP or event.key == pygame.K_x:
+                tetromino.rotate_clockwise()
+
+            if event.key == pygame.K_z:
+                tetromino.rotate_counter_clockwise()
 
     # ----- overwrite old screen with black, draw new screen, and show (flip) it -----
     screen.fill(black)
 
-    #screen.blit(screen, pygame.draw.rect(screen, gray, square)) # NOTE: Drawing test rect on screen
     x, y = np.where(tetromino.shape == 1)
     for a, b in zip(x, y):
         pygame.draw.rect(screen, tetromino.color, (x_pos + (a * move_distance), y_pos + (b * move_distance), shape_width, shape_height))
