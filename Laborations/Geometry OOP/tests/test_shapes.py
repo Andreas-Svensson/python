@@ -39,8 +39,8 @@ class TestCircle(unittest.TestCase): # TestCircle sub-class of TestCase
         """Testing if Circle instance is created with expected values"""
         c = self.create_circle()
         self.assertEqual(c.radius,  self.r)
-        self.assertEqual(c.x_pos,   self.x)
-        self.assertEqual(c.y_pos,   self.y)
+        self.assertEqual(c.x,   self.x)
+        self.assertEqual(c.y,   self.y)
 
     def test_create_circle_empty(self):
         c = Circle()
@@ -137,12 +137,15 @@ class TestCircle(unittest.TestCase): # TestCircle sub-class of TestCase
         self.assertEqual(c.calculate_circumference(), (2 * pi * self.r))
 
     def test_move_to(self):
-        """Testing if move_to (x,y) works as expected"""
-        c = self.create_circle()
-        c.move_to(2, 2)
-        self.assertEqual((c.x_pos, c.y_pos), (2, 2))
+        """Testing if translate (x,y) works as expected"""
+        c1 = self.create_circle()
+        c1.translate(2, 2)
+        self.assertEqual((c1.x, c1.y), (self.x + 2, self.y + 2))
 
-    # TODO check contains_point
+        c2 = self.create_circle()
+        c2.translate(-2, -2)
+        self.assertEqual((c2.x, c2.y), (self.x - 2, self.y - 2))
+
     def test_contains_point(self):
         """Testing if contains_point correctly checks for circle containing given point"""
         c = self.create_circle()
@@ -167,5 +170,5 @@ class TestCircle(unittest.TestCase): # TestCircle sub-class of TestCase
 # TODO class for Cuboid checks
     # equivalent checks here, including width, height, length, and volume
 
-if __name__ == "__main__": # use this as boilerplate code for now, will go through at some other point
+if __name__ == "__main__": # execute following code if run from this file:
     unittest.main()

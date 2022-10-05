@@ -3,40 +3,42 @@ from math import pi, dist
 
 class Shape: # super class of geometrical shapes
     """Super class of geometrical shapes: Circle, Rectangle, Sphere, Cuboid"""
-    def __init__(self,  x_pos: (int | float) = 0, 
-                        y_pos: (int | float) = 0) -> None:
+    def __init__(self,  x: (int | float) = 0, 
+                        y: (int | float) = 0) -> None:
 
-        self.x_pos = x_pos # x-coordinate of shape, default 0
-        self.y_pos = y_pos # y-coordinate of shape, default 0
-    
+        self.x = x # x-coordinate of shape, default 0
+        self.y = y # y-coordinate of shape, default 0
+
     # ----- Properties -----
     @property
-    def x_pos(self) -> (int | float):
-        return self._x_pos
+    def x(self) -> (int | float):
+        """x-position of shape"""
+        return self._x
     
-    @x_pos.setter
-    def x_pos(self, value: (int | float)) -> (int | float):
-        self._x_pos = self.check_coordinate(value) # error handling through check_coordinate method
+    @x.setter
+    def x(self, value: (int | float)) -> (int | float):
+        self._x = self.check_coordinate(value) # error handling through check_coordinate method
 
     @property
-    def y_pos(self) -> (int | float):
-        return self._y_pos
+    def y(self) -> (int | float):
+        """y-position of shape"""
+        return self._y
     
-    @y_pos.setter
-    def y_pos(self, value: (int | float)) -> (int | float):
-        self._y_pos = self.check_coordinate(value) # error handling through check_coordinate method
+    @y.setter
+    def y(self, value: (int | float)) -> (int | float):
+        self._y = self.check_coordinate(value) # error handling through check_coordinate method
 
     # ----- Error handling -----
     def check_coordinate(self, value: (int | float)) -> (int | float):
         """Error handling method for all coordinate values"""
         if not isinstance(value, (int, float)): # value is not int or float:
-            raise TypeError(f"Coordinate must be a number, not {type(value)}")
+            raise TypeError(f"Coordinate must be a number, not {type(value).__name__}")
         return value # if all checks have been passed
 
     def check_measurement(self, value: (int | float)) -> (int | float):
         """Error handling method for all measurement values"""
         if not isinstance(value, (int, float)): # value is not int or float:
-            raise TypeError(f"Measurement must be a number, not {type(value)}")
+            raise TypeError(f"Measurement must be a number, not {type(value).__name__}")
         if value <= 0: # value is not greater than 0:
             raise ValueError(f"Value must be over 0, not {value}")
         return value # if all checks have been passed
@@ -45,49 +47,49 @@ class Shape: # super class of geometrical shapes
     def __eq__(self, other: Shape) -> bool:
         """Override of equal (==) operator for all shapes"""
         if isinstance(other, type(self)): # if same class
-            return self.x_pos == other.x_pos # and same x_pos (TODO: later will be area when implemented)
+            return self.x == other.x # and same x_pos (TODO: later will be area when implemented)
         else:
             return False
 
     def __lt__(self, other: Shape) -> bool:
         """Override of lesser than (<) operator for all shapes"""
         if isinstance(other, type(self)): # if same class
-            return self.x_pos < other.x_pos # and same x_pos (TODO: later will be area when implemented)
+            return self.x < other.x # and same x_pos (TODO: later will be area when implemented)
         else:
             return False
             
     def __gt__(self, other: Shape) -> bool:
         """Override of greater than (>) operator for all shapes"""
         if isinstance(other, type(self)): # if same class
-            return self.x_pos > other.x_pos # and same x_pos (TODO: later will be area when implemented)
+            return self.x > other.x # and same x_pos (TODO: later will be area when implemented)
         else:
             return False
 
     def __le__(self, other: Shape) -> bool:
         """Override of lesser or equal (<=) operator for all shapes"""
         if isinstance(other, type(self)): # if same class
-            return self.x_pos <= other.x_pos # and same x_pos (TODO: later will be area when implemented)
+            return self.x <= other.x # and same x_pos (TODO: later will be area when implemented)
         else:
             return False
 
     def __ge__(self, other: Shape) -> bool:
         """Override of greater or equal (>=) operator for all shapes"""
         if isinstance(other, type(self)): # if same class
-            return self.x_pos >= other.x_pos # and same x_pos (TODO: later will be area when implemented)
+            return self.x >= other.x # and same x_pos (TODO: later will be area when implemented)
         else:
             return False
 
     # ----- Other methods -----
-    def move_to(self, x: (int | float) = 0, y: (int | float) = 0) -> None: # TODO move to relative point rather than absolute?
-        self.x_pos = x
-        self.y_pos = y
+    def translate(self, x: (int | float) = 0, y: (int | float) = 0) -> None: # TODO move to relative point rather than absolute?
+        self.x += x
+        self.y += y
 
     # ----- String representation -----
     def __repr__(self) -> str:
-        return f"Shape(x_pos = {self.x_pos}, y_pos = {self.y_pos})"
+        return f"Shape(x_pos = {self.x}, y_pos = {self.y})"
 
     def __str__(self) -> str:
-        return f"Shape with x: {self.x_pos}, y: {self.y_pos}"
+        return f"Shape with x: {self.x}, y: {self.y}"
 
 class Circle(Shape): # sub-class inheriting from Shape
     """Class for geometrical shapes of type Circle, sub-class of Shape"""
@@ -101,16 +103,17 @@ class Circle(Shape): # sub-class inheriting from Shape
     # ----- Properties -----
     @property
     def radius(self) -> (int | float):
+        """Radius of circle"""
         return self._radius
 
     @radius.setter
     def radius(self, value: (int | float)) -> (int | float):
         self._radius = self.check_measurement(value)  # error handling through check_measurement method
 
-    # ----- Methods -----
+    # ----- Other methods -----
     def is_unit_circle(self) -> bool:
         """Checks if Circle is a unit circle (circle with radius 1 centered in origo)"""
-        if self.radius == 1 and self.x_pos == 0 and self.y_pos == 0:
+        if self.radius == 1 and self.x == 0 and self.y == 0:
             return True
         else:
             return False
@@ -125,30 +128,33 @@ class Circle(Shape): # sub-class inheriting from Shape
         area = 2 * pi * self.radius
         return area
 
-    # TODO contains_point
-    def contains_point(self, x, y) -> bool:
+    def contains_point(self, x: (int | float), y: (int | float)) -> bool:
         """Check if circle contains a given point"""
-        distance = dist((self.x_pos, self.y_pos), (x, y)) # calculate euclid distance between center of self and input point
-        print(f"Distance between {x},{y} and {self.x_pos},{self.y_pos} is {distance}, radius is {self.radius}")
-        if distance <= self.radius: # if distance to imput point is less than radius:
-            return True # point is within circle
+        distance = dist((self.x, self.y), (x, y)) # calculate euclidean distance between center point of self and input point
+        if distance <= self.radius: # if distance to input point is less than or equal to radius:
+            return True # point is within circle (including on circle border)
         else:
             return False # point is outside circle
 
     # TODO plot
 
     # ----- String representation -----
-    # TODO __repr__
-    # TODO __str__
+    def __repr__(self) -> str:
+        """"Describes self as a string"""
+        return f"Shape(x = {self.x}, y = {self.y})"
+
+    def __str__(self) -> str:
+        """Describes self as a string for printing"""
+        return f"Shape in position x: {self.x}, y: {self.y}"
 
 class Rectangle(Shape): # sub-class inheriting from Shape
     """Class for geometrical shapes of type Rectangle, sub-class of Shape"""
     def __init__(self,  width:  (int | float) = 1, 
                         height: (int | float) = 1, 
-                        x_pos:  (int | float) = 0, 
-                        y_pos:  (int | float) = 0) -> None:
+                        x:      (int | float) = 0, 
+                        y:      (int | float) = 0) -> None:
 
-        super().__init__(x_pos, y_pos) # x and y coordinates handled in super class
+        super().__init__(x, y)  # x and y coordinates handled in super class
         self.width = width      # width of rectangle,   default 1
         self.height = height    # height of rectangle,  default 1
         # TODO self.area
@@ -175,13 +181,13 @@ class Rectangle(Shape): # sub-class inheriting from Shape
 class Sphere(Shape): # sub-class inheriting from Shape
     """Class for geometrical shapes of type Sphere, sub-class of Shape"""
     def __init__(self,  radius: (int | float) = 1, 
-                        x_pos:  (int | float) = 0, 
-                        y_pos:  (int | float) = 0, 
-                        z_pos:  (int | float) = 0) -> None:
+                        x:  (int | float) = 0, 
+                        y:  (int | float) = 0, 
+                        z:  (int | float) = 0) -> None:
 
-        super().__init__(x_pos, y_pos) # x and y coordinates handled in super class
+        super().__init__(x, y)  # x and y coordinates handled in super class
         self.radius = radius    # radius of sphere,     default 1
-        self.z_pos = z_pos      # z-coord of sphere,    default 0
+        self.z = z              # z-coord of sphere,    default 0
         # TODO self.area
         # TODO self.circumference
         # TODO self.volume
@@ -211,15 +217,15 @@ class Cuboid(Shape): # sub-class inheriting from Shape
     def __init__(self,  width:  (int | float) = 1, 
                         height: (int | float) = 1, 
                         length: (int | float) = 1, 
-                        x_pos:  (int | float) = 0, 
-                        y_pos:  (int | float) = 0, 
-                        z_pos:  (int | float) = 0) -> None:
+                        x:      (int | float) = 0, 
+                        y:      (int | float) = 0, 
+                        z:      (int | float) = 0) -> None:
 
-        super().__init__(x_pos, y_pos) # x and y coordinates handled in super class
+        super().__init__(x, y)  # x and y coordinates handled in super class
         self.width = width      # width of cuboid,    default 1
         self.height = height    # height of cuboid,   default 1
         self.length = length    # length of cuboid,   default 1
-        self.z_pos = z_pos      # z-coord of cuboid,  default 0
+        self.z = z              # z-coord of cuboid,  default 0
         # TODO self.area
         # TODO self.circumference
         # TODO self.volume
