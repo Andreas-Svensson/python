@@ -16,7 +16,7 @@ class Shape: # super class of geometrical shapes
         return self._x
     
     @x.setter
-    def x(self, value: (int | float)) -> (int | float):
+    def x(self, value: (int | float)):
         self._x = self.check_coordinate(value) # error handling through check_coordinate method
 
     @property
@@ -25,7 +25,7 @@ class Shape: # super class of geometrical shapes
         return self._y
     
     @y.setter
-    def y(self, value: (int | float)) -> (int | float):
+    def y(self, value: (int | float)):
         self._y = self.check_coordinate(value) # error handling through check_coordinate method
 
     # ----- Error handling -----
@@ -99,6 +99,8 @@ class Circle(Shape): # sub-class inheriting from Shape
 
         super().__init__(x_pos, y_pos) # x and y coordinates handled in super class
         self.radius = radius # radius of circle, default 1
+        self.area = self.calculate_area()
+        self.circumference = self.calculate_circumference()
 
     # ----- Properties -----
     @property
@@ -107,8 +109,26 @@ class Circle(Shape): # sub-class inheriting from Shape
         return self._radius
 
     @radius.setter
-    def radius(self, value: (int | float)) -> (int | float):
+    def radius(self, value: (int | float)):
         self._radius = self.check_measurement(value)  # error handling through check_measurement method
+
+    @property
+    def area(self) -> (int | float):
+        """Area of circle"""
+        return self._area
+
+    @area.setter
+    def area(self, value):
+        self._area = value
+
+    @property
+    def circumference(self) -> (int | float):
+        """Circumference of circle"""
+        return self._circumference
+
+    @circumference.setter
+    def circumference(self, value):
+        self._circumference = value
 
     # ----- Other methods -----
     def is_unit_circle(self) -> bool:
