@@ -1,6 +1,6 @@
 from __future__ import annotations
 import sys, os
-import unittest # for code at bottom of file
+import unittest
 from math import pi
 
 # change directory to where this file is
@@ -13,7 +13,7 @@ sys.path.append(path_to_vector_module)
 
 from shapes import *
 
-    # ----- Tests to run -----
+# ----- Tests to run -----
 class TestCircle(unittest.TestCase): # TestCircle sub-class of TestCase
 
     # ----- Attribute values -----
@@ -295,11 +295,317 @@ class TestRectangle(unittest.TestCase): # TestRectangle sub-class of TestCase
         self.assertFalse(r.contains_point(self.x - self.w / .9, self.y - self.h / .9)) # bottom left corner
         self.assertFalse(r.contains_point(self.x + self.w / .9, self.y - self.h / .9)) # bottom right corner
 
-# TODO class for Sphere checks
-    # equivalent checks here, including zpos and volume
+class TestCircle(unittest.TestCase): # TestCircle sub-class of TestCase
 
-# TODO class for Cuboid checks
-    # equivalent checks here, including width, height, length, and volume
+    # ----- Attribute values -----
+    def setUp(self):
+        """Specifies values to use in creation of default test spheres"""
+        self.r, self.x, self.y, self.z = 2, 3, 4, 5 # TODO go through variety of values to test
+
+    # ----- Default sphere for unit testing -----
+    def create_sphere(self, r_mul: (int | float) = 1, x_mul: (int | float) = 1, y_mul: (int | float) = 1, z_mul: (int | float) = 1) -> Sphere:
+        """Creates a default sphere, for unit testing, 
+        
+        Created sphere uses r, x, y, z values defined in setUp method, those values are multiplied by input r_mul, x_mul, y_mul, z_mul values (default 1)"""
+        return Sphere(self.r * r_mul, self.x * x_mul, self.y * y_mul, self.z * z_mul)
+
+    # ----- Tests -----
+    def test_create_sphere(self):
+        """Testing if Sphere instance is created with expected values"""
+        c = self.create_sphere()
+        self.assertEqual(c.radius,  self.r)
+        self.assertEqual(c.x,       self.x)
+        self.assertEqual(c.y,       self.y)
+        self.assertEqual(c.z,       self.z)
+
+    # ----- Testing creating spheres with invalid argument values -----
+    def test_create_sphere_string(self):
+        """Testing if creating Sphere with string parameter raises TypeError"""
+        self.assertRaises(TypeError, Sphere, "1", 1, 1, 1)
+        self.assertRaises(TypeError, Sphere, 1, "1", 1, 1)
+        self.assertRaises(TypeError, Sphere, 1, 1, "1", 1)
+        self.assertRaises(TypeError, Sphere, 1, 1, 1, "1")
+
+    def test_create_sphere_negative(self):
+        """Testing if creating Sphere with invalid measurement raises ValueError"""
+        self.assertRaises(ValueError, Sphere, 0, 1, 1, 1)
+        self.assertRaises(ValueError, Sphere, -1, 1, 1, 1)
+
+    # ----- Testing comparison operators (comparing area) -----
+    def test_equality_operator(self):
+        """Testing equal (==) operator on spheres"""
+        c_normal = self.create_sphere()
+        c_small = self.create_sphere(.5, .5, .5, .5)
+        c_large = self.create_sphere(2, 2, 2, 2)
+
+        self.assertEqual(c_normal, c_normal)
+        self.assertNotEqual(c_normal, c_small)
+        self.assertNotEqual(c_normal, c_large)
+
+    def test_lesser_than_operator(self):
+        """Testing lesser than (<) operator on spheres"""
+        c_normal = self.create_sphere()
+        c_small = self.create_sphere(.5, .5, .5, .5)
+        c_large = self.create_sphere(2, 2, 2, 2)
+
+        self.assertLess(c_normal, c_large)
+        self.assertLess(c_small, c_normal)
+        self.assertLess(c_small, c_large)
+
+    def test_greater_than_operator(self):
+        """Testing greater than (>) operator on spheres"""
+        c_normal = self.create_sphere()
+        c_small = self.create_sphere(.5, .5, .5, .5)
+        c_large = self.create_sphere(2, 2, 2, 2)
+
+        self.assertGreater(c_normal, c_small)
+        self.assertGreater(c_large, c_normal)
+        self.assertGreater(c_large, c_small)
+
+    def test_lesser_equal_operator(self):
+        """Testing lesser or equal (<=) operator on spheres"""
+        c_normal = self.create_sphere()
+        c_small = self.create_sphere(.5, .5, .5, .5)
+        c_large = self.create_sphere(2, 2, 2, 2)
+
+        self.assertLessEqual(c_large, c_large)
+        self.assertLessEqual(c_normal, c_large)
+        self.assertLessEqual(c_normal, c_normal)
+        self.assertLessEqual(c_small, c_large)
+        self.assertLessEqual(c_small, c_normal)
+        self.assertLessEqual(c_small, c_small)
+
+    def test_greater_equal_operator(self):
+        """Testing greater or equal (>=) operator on spheres"""
+        c_normal = self.create_sphere()
+        c_small = self.create_sphere(.5, .5, .5, .5)
+        c_large = self.create_sphere(2, 2, 2, 2)
+
+        self.assertGreaterEqual(c_large, c_large)
+        self.assertGreaterEqual(c_large, c_normal)
+        self.assertGreaterEqual(c_large, c_small)
+        self.assertGreaterEqual(c_normal, c_normal)
+        self.assertGreaterEqual(c_normal, c_small)
+
+    # ----- Testing other methods -----
+    def test_is_unit_shape(self):
+        """Testing if sphere is "unit sphere" (sphere with radius 1 centered in origo)"""
+        c1 = Sphere(1, 0, 0, 0)
+        c2 = Sphere(2, 0, 0, 0)
+        c3 = Sphere(1, 0, 0, 1)
+
+        self.assertTrue(c1.is_unit_shape()) # is "unit sphere"
+        self.assertFalse(c2.is_unit_shape())
+        self.assertFalse(c3.is_unit_shape())
+
+    def test_calculate_area(self):
+        """Testing if area of sphere is calculated correctly"""
+        c = self.create_sphere()
+        self.assertEqual(c.area, (4 * pi * self.r ** 2))
+
+    def test_calculate_volume(self):
+        """Testing if volume of sphere is calculated correctly"""
+        c = self.create_sphere()
+        self.assertEqual(c.volume, ((4/3) * pi * self.r**3))
+
+    def test_translate(self):
+        """Testing if translate (x,y) works as expected"""
+        c1 = self.create_sphere()
+        c1.translate(2, 2, 2)
+        self.assertEqual((c1.x, c1.y, c1.z), (self.x + 2, self.y + 2, self.z + 2))
+
+        c2 = self.create_sphere()
+        c2.translate(-2, -2, -2)
+        self.assertEqual((c2.x, c2.y, c2.z), (self.x - 2, self.y - 2, self.z - 2))
+
+    def test_contains_point_true(self):
+        """Testing if contains_point correctly checks for sphere containing given point"""
+        c = self.create_sphere()
+        self.assertTrue(c.contains_point(self.x, self.y, self.z)) # x, y, z
+        # radius distance units from center of sphere:
+        self.assertTrue(c.contains_point(self.x + self.r, self.y, self.z)) # x + r
+        self.assertTrue(c.contains_point(self.x, self.y + self.r, self.z)) # y + r
+        self.assertTrue(c.contains_point(self.x, self.y, self.z + self.r)) # z + r
+
+        self.assertTrue(c.contains_point(self.x - self.r, self.y, self.z)) # x - r
+        self.assertTrue(c.contains_point(self.x, self.y - self.r, self.z)) # y - r
+        self.assertTrue(c.contains_point(self.x, self.y, self.z - self.r)) # z - r
+
+    def test_contains_point_false(self):
+        """Testing if contains_point correctly checks for sphere containing given point"""
+        c = self.create_sphere()
+        # radius + 1 distance units from center of sphere:
+        self.assertFalse(c.contains_point(self.x + self.r + 1, self.y, self.z)) # x + r + 1
+        self.assertFalse(c.contains_point(self.x, self.y + self.r + 1, self.z)) # y + r + 1
+        self.assertFalse(c.contains_point(self.x, self.y, self.z + self.r + 1)) # z + r + 1
+
+        self.assertFalse(c.contains_point(self.x - self.r - 1, self.y, self.z)) # x - r - 1
+        self.assertFalse(c.contains_point(self.x, self.y - self.r - 1, self.z)) # y - r - 1
+        self.assertFalse(c.contains_point(self.x, self.y, self.z - self.r - 1)) # z - r - 1
+
+class TestCuboid(unittest.TestCase): # TestCuboid sub-class of TestCase
+
+    # ----- Attribute values -----
+    def setUp(self):
+        """Specifies values to use in creation of default test cuboids"""
+        self.w, self.h, self.l, self.x, self.y, self.z = 1, 1, 1, 0, 0, 0
+
+    # ----- Default cuboid for unit testing -----
+    def create_cuboid(self, w_mul: (int | float) = 1, h_mul: (int | float) = 1, l_mul: (int | float) = 1, x_mul: (int | float) = 1, y_mul: (int | float) = 1, z_mul: (int | float) = 1) -> Cuboid:
+        """Creates a default cuboid, for unit testing, 
+        
+        Created cuboid uses w, h, l, x, y, z values defined in setUp method, those values are multiplied by input w_mul, h_mul, l_mul x_mul, y_mul, z_mul values (default 1)"""
+        return Cuboid(self.w * w_mul, self.h * h_mul, self.l * l_mul, self.x * x_mul, self.y * y_mul, self.z * z_mul)
+
+    # ----- Tests -----
+    def test_create_cuboid(self):
+        """Testing if Cuboid instance is created with expected values"""
+        c = self.create_cuboid()
+        self.assertEqual(c.width,   self.w)
+        self.assertEqual(c.height,  self.h)
+        self.assertEqual(c.length,  self.l)
+        self.assertEqual(c.x,       self.x)
+        self.assertEqual(c.y,       self.y)
+        self.assertEqual(c.z,       self.z)
+
+    # ----- Testing creating circles with invalid argument values -----
+    def test_create_cuboid_string(self):
+        """Testing if creating Cuboid with string parameter raises TypeError"""
+        self.assertRaises(TypeError, Cuboid, "1", 1, 1, 1, 1, 1)
+        self.assertRaises(TypeError, Cuboid, 1, "1", 1, 1, 1, 1)
+        self.assertRaises(TypeError, Cuboid, 1, 1, "1", 1, 1, 1)
+        self.assertRaises(TypeError, Cuboid, 1, 1, 1, "1", 1, 1)
+        self.assertRaises(TypeError, Cuboid, 1, 1, 1, 1, "1", 1)
+        self.assertRaises(TypeError, Cuboid, 1, 1, 1, 1, 1, "1")
+
+    def test_create_cuboid_negative(self):
+        """Testing if creating Cuboid with invalid measurement raises ValueError"""
+        self.assertRaises(ValueError, Cuboid, 0, 1, 1, 1, 1, 1) # 0
+        self.assertRaises(ValueError, Cuboid, 1, 0, 1, 1, 1, 1) # 0
+        self.assertRaises(ValueError, Cuboid, 1, 1, 0, 1, 1, 1) # 0
+
+        self.assertRaises(ValueError, Cuboid, -1, 1, 1, 1, 1, 1) # -1
+        self.assertRaises(ValueError, Cuboid, 1, -1, 1, 1, 1, 1) # -1
+        self.assertRaises(ValueError, Cuboid, 1, 1, -1, 1, 1, 1) # -1
+
+    # ----- Testing comparison operators (comparing area) -----
+    def test_equality_operator(self):
+        """Testing equal (==) operator on Circles"""
+        c_normal = self.create_cuboid()
+        c_small = self.create_cuboid(.5, .5, .5, .5, .5, .5)
+        c_large = self.create_cuboid(2, 2, 2, 2, 2, 2)
+
+        self.assertEqual(c_normal, c_normal)
+        self.assertNotEqual(c_normal, c_small)
+        self.assertNotEqual(c_normal, c_large)
+
+    def test_lesser_than_operator(self):
+        """Testing lesser than (<) operator on Circles"""
+        c_normal = self.create_cuboid()
+        c_small = self.create_cuboid(.5, .5, .5, .5, .5, .5)
+        c_large = self.create_cuboid(2, 2, 2, 2, 2, 2)
+
+        self.assertLess(c_normal, c_large)
+        self.assertLess(c_small, c_normal)
+        self.assertLess(c_small, c_large)
+
+    def test_greater_than_operator(self):
+        """Testing greater than (>) operator on Circles"""
+        c_normal = self.create_cuboid()
+        c_small = self.create_cuboid(.5, .5, .5, .5, .5, .5)
+        c_large = self.create_cuboid(2, 2, 2, 2, 2, 2)
+
+        self.assertGreater(c_normal, c_small)
+        self.assertGreater(c_large, c_normal)
+        self.assertGreater(c_large, c_small)
+
+    def test_lesser_equal_operator(self):
+        """Testing lesser or equal (<=) operator on Circles"""
+        c_normal = self.create_cuboid()
+        c_small = self.create_cuboid(.5, .5, .5, .5, .5, .5)
+        c_large = self.create_cuboid(2, 2, 2, 2, 2, 2)
+
+        self.assertLessEqual(c_large, c_large)
+        self.assertLessEqual(c_normal, c_large)
+        self.assertLessEqual(c_normal, c_normal)
+        self.assertLessEqual(c_small, c_large)
+        self.assertLessEqual(c_small, c_normal)
+        self.assertLessEqual(c_small, c_small)
+
+    def test_greater_equal_operator(self):
+        """Testing greater or equal (>=) operator on Circles"""
+        c_normal = self.create_cuboid()
+        c_small = self.create_cuboid(.5, .5, .5, .5, .5, .5)
+        c_large = self.create_cuboid(2, 2, 2, 2, 2, 2)
+
+        self.assertGreaterEqual(c_large, c_large)
+        self.assertGreaterEqual(c_large, c_normal)
+        self.assertGreaterEqual(c_large, c_small)
+        self.assertGreaterEqual(c_normal, c_normal)
+        self.assertGreaterEqual(c_normal, c_small)
+
+    # ----- Testing other methods -----
+    def test_is_cube(self):
+        """Testing if cuboid is a cube (cuboid with all sides equal)"""
+        c1 = Cuboid(3, 3, 3, 1, 2, -3)
+        c2 = Cuboid(2, 1, 1, 1, -1, 1)
+        c3 = Cuboid(1, 1, 11, 1, 1, 1)
+
+        self.assertTrue(c1.is_equilateral()) # is a cube
+        self.assertFalse(c2.is_equilateral())
+        self.assertFalse(c3.is_equilateral())
+
+    def test_calculate_area(self):
+        """Testing if area of cuboid is calculated correctly"""
+        c = self.create_cuboid()
+        self.assertEqual(c.area, (2 * (self.w * self.h + self.h * self.l + self.l * self.w)))
+
+    def test_calculate_volume(self):
+        """Testing if volume of cuboid is calculated correctly"""
+        c = self.create_cuboid()
+        self.assertEqual(c.volume, (self.w * self.h * self.l))
+
+    def test_calculate_perimeter(self):
+        """Testing if perimeter of cuboid is calculated correctly"""
+        c = self.create_cuboid()
+        self.assertEqual(c.perimeter, ((self.w * 4) + (self.h * 4) + (self.l * 4)))
+
+    def test_translate(self):
+        """Testing if translate (x,y) works as expected"""
+        c1 = self.create_cuboid()
+        c1.translate(2, 2, 2)
+        self.assertEqual((c1.x, c1.y, c1.z), (self.x + 2, self.y + 2, self.z + 2))
+
+        c2 = self.create_cuboid()
+        c2.translate(-2, -2, -2)
+        self.assertEqual((c2.x, c2.y, c2.z), (self.x - 2, self.y - 2, self.z - 2))
+
+    def test_contains_point_true(self):
+        """Testing if contains_point correctly checks for cuboid containing given point"""
+        c = self.create_cuboid()
+        # (width or height) / 2 distance units from center of cuboid:
+        self.assertTrue(c.contains_point(self.x + self.w / 2, self.y + self.h / 2, self.z + self.l / 2)) # top corner 1
+        self.assertTrue(c.contains_point(self.x + self.w / 2, self.y + self.h / 2, self.z - self.l / 2)) # top corner 2
+        self.assertTrue(c.contains_point(self.x - self.w / 2, self.y + self.h / 2, self.z + self.l / 2)) # top corner 3
+        self.assertTrue(c.contains_point(self.x - self.w / 2, self.y + self.h / 2, self.z - self.l / 2)) # top corner 4
+        self.assertTrue(c.contains_point(self.x + self.w / 2, self.y - self.h / 2, self.z + self.l / 2)) # bottom corner 1
+        self.assertTrue(c.contains_point(self.x + self.w / 2, self.y - self.h / 2, self.z - self.l / 2)) # bottom corner 2
+        self.assertTrue(c.contains_point(self.x - self.w / 2, self.y - self.h / 2, self.z + self.l / 2)) # bottom corner 3
+        self.assertTrue(c.contains_point(self.x - self.w / 2, self.y - self.h / 2, self.z - self.l / 2)) # bottom corner 4
+
+    def test_contains_point_false(self):
+        """Testing if contains_point correctly checks for cuboid not containing given point"""
+        c = self.create_cuboid()
+        # (width or height) / .9 distance units from center of cuboid (slightly outside):
+        self.assertFalse(c.contains_point(self.x + self.w / .9, self.y + self.h / .9, self.z + self.l / .9)) # top corner 1
+        self.assertFalse(c.contains_point(self.x + self.w / .9, self.y + self.h / .9, self.z - self.l / .9)) # top corner 2
+        self.assertFalse(c.contains_point(self.x - self.w / .9, self.y + self.h / .9, self.z + self.l / .9)) # top corner 3
+        self.assertFalse(c.contains_point(self.x - self.w / .9, self.y + self.h / .9, self.z - self.l / .9)) # top corner 4
+
+        self.assertFalse(c.contains_point(self.x + self.w / .9, self.y - self.h / .9, self.z + self.l / .9)) # bottom corner 1
+        self.assertFalse(c.contains_point(self.x + self.w / .9, self.y - self.h / .9, self.z - self.l / .9)) # bottom corner 2
+        self.assertFalse(c.contains_point(self.x - self.w / .9, self.y - self.h / .9, self.z + self.l / .9)) # bottom corner 3
+        self.assertFalse(c.contains_point(self.x - self.w / .9, self.y - self.h / .9, self.z - self.l / .9)) # bottom corner 4
 
 if __name__ == "__main__": # execute following code if run from this file:
     unittest.main()
