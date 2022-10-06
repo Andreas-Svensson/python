@@ -49,40 +49,40 @@ class Shape: # super class of geometrical shapes
     def __eq__(self, other: Shape) -> bool:
         """Override of equal (==) operator for all shapes"""
         if isinstance(other, type(self)): # if same class
-            return self.x == other.x # and same x_pos (TODO: later will be area when implemented)
+            return self.area == other.area
         else:
             return False
 
     def __lt__(self, other: Shape) -> bool:
         """Override of lesser than (<) operator for all shapes"""
         if isinstance(other, type(self)): # if same class
-            return self.x < other.x # and same x_pos (TODO: later will be area when implemented)
+            return self.area < other.area
         else:
             return False
             
     def __gt__(self, other: Shape) -> bool:
         """Override of greater than (>) operator for all shapes"""
         if isinstance(other, type(self)): # if same class
-            return self.x > other.x # and same x_pos (TODO: later will be area when implemented)
+            return self.area > other.area
         else:
             return False
 
     def __le__(self, other: Shape) -> bool:
         """Override of lesser or equal (<=) operator for all shapes"""
         if isinstance(other, type(self)): # if same class
-            return self.x <= other.x # and same x_pos (TODO: later will be area when implemented)
+            return self.area <= other.area
         else:
             return False
 
     def __ge__(self, other: Shape) -> bool:
         """Override of greater or equal (>=) operator for all shapes"""
         if isinstance(other, type(self)): # if same class
-            return self.x >= other.x # and same x_pos (TODO: later will be area when implemented)
+            return self.area >= other.area
         else:
             return False
 
     # ----- Other methods -----
-    def translate(self, x: (int | float) = 0, y: (int | float) = 0) -> None: # TODO move to relative point rather than absolute?
+    def translate(self, x: (int | float) = 0, y: (int | float) = 0) -> None:
         self.x += x
         self.y += y
 
@@ -158,7 +158,7 @@ class Circle(Shape): # sub-class inheriting from Shape
         else:
             return False # point is outside circle
 
-    def plot(self, ax):
+    def plot(self, ax): # TODO type hinting
         """Adds Circle patch object to ax"""
         ax.add_patch(patches.Circle((self.x, self.y), self.radius))
         return ax
@@ -166,11 +166,11 @@ class Circle(Shape): # sub-class inheriting from Shape
     # ----- String representation -----
     def __repr__(self) -> str:
         """"Describes self as a string"""
-        return f"Shape(x = {self.x}, y = {self.y})"
+        return f"Circle(x = {self.x}, y = {self.y}, radius = {self.radius})"
 
     def __str__(self) -> str:
         """Describes self as a string for printing"""
-        return f"Shape in position x: {self.x}, y: {self.y}"
+        return f"Circle in position x: {self.x}, y: {self.y}, with radius: {self.radius}, area: {self.area}, circumference: {self.circumference}"
 
 class Rectangle(Shape): # sub-class inheriting from Shape
     """Class for geometrical shapes of type Rectangle, sub-class of Shape"""
@@ -182,26 +182,87 @@ class Rectangle(Shape): # sub-class inheriting from Shape
         super().__init__(x, y)  # x and y coordinates handled in super class
         self.width = width      # width of rectangle,   default 1
         self.height = height    # height of rectangle,  default 1
-        # TODO self.area
-        # TODO self.circumference
+        self.area = self.calculate_area()
+        self.perimeter = self.calculate_perimeter()
 
     # ----- Properties -----
-    # TODO @property
-    # TODO @width.setter # containing error handling
+    @property
+    def width(self) -> (int | float):
+        """Width of rectangle"""
+        return self._width
 
-    # TODO @property
-    # TODO @height.setter # containing error handling
+    @width.setter
+    def width(self, value: (int | float)):
+        self._width = self.check_measurement(value)  # error handling through check_measurement method
 
-    # ----- Methods -----
-    # TODO is_square
-    # TODO calculate_area
-    # TODO calculate_circumference
-    # TODO contains_point
-    # TODO plot
+    @property
+    def height(self) -> (int | float):
+        """Height of rectangle"""
+        return self._height
+
+    @height.setter
+    def height(self, value: (int | float)):
+        self._height = self.check_measurement(value)  # error handling through check_measurement method
+
+    @property
+    def area(self) -> (int | float):
+        """Area of rectangle"""
+        return self._area
+
+    @area.setter
+    def area(self, value: (int | float)):
+        self._area = value
+
+    @property
+    def perimeter(self) -> (int | float):
+        """Perimeter of rectangle"""
+        return self._perimeter
+
+    @perimeter.setter
+    def perimeter(self, value: (int | float)):
+        self._perimeter = value
+
+    # ----- Other methods -----
+    def is_square(self) -> bool:
+        """Checks if Rectangle is a square"""
+        if self.width == self.height:
+            return True
+        else:
+            return False
+
+    def calculate_area(self) -> (int | float):
+        """Calculates area of rectangle"""
+        area = self.width * self.height
+        return area
+
+    def calculate_perimeter(self) -> (int | float):
+        """Calculates perimeter of rectangle"""
+        perimeter = self.width * 2 + self.height * 2
+        return perimeter
+
+    def contains_point(self, x: (int | float), y: (int | float)) -> bool:
+        """Check if rectangle contains a given point"""
+        width_range, height_range = self.width / 2, self.height / 2 # distance from rectangle center that point needs to be within
+
+        if  (self.x - width_range <= x <= self.x + width_range 
+        and self.y - height_range <= y <= self.y + height_range): # if x and y within distance:
+            return True # point is within rectangle (including on rectangle border)
+        else:
+            return False # point is outside rectangle
+
+    def plot(self, ax): # TODO type hinting
+        """Adds Rectangle patch object to ax"""
+        ax.add_patch(patches.Rectangle((self.x, self.y), self.width, self.height))
+        return ax
 
     # ----- String representation -----
-    # TODO __repr__
-    # TODO __str__
+    def __repr__(self) -> str:
+        """"Describes self as a string"""
+        return f"Rectangle(x = {self.x}, y = {self.y}, width = {self.width}, height = {self.height})"
+
+    def __str__(self) -> str:
+        """Describes self as a string for printing"""
+        return f"Rectangle in position x: {self.x}, y: {self.y}, with width: {self.width}, height: {self.height}, area: {self.area}, perimeter: {self.perimeter}"
 
 class Sphere(Shape): # sub-class inheriting from Shape
     """Class for geometrical shapes of type Sphere, sub-class of Shape"""
