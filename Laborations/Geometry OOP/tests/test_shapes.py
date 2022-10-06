@@ -21,17 +21,11 @@ class TestCircle(unittest.TestCase): # TestCircle sub-class of TestCase
         self.r, self.x, self.y = 2, 3, 4 # TODO go through variety of values to test
 
     # ----- Default shape for unit testing -----
-    def create_circle(self) -> Circle:
-        """Creates a default circle, for unit testing"""
-        return Circle(self.r, self.x, self.y)
-    
-    def create_small_circle(self) -> Circle:
-        """Creates a circle with all parameters smaller than default one, for unit testing"""
-        return Circle(self.r / 2, self.x - 2, self.y - 2)
-    
-    def create_large_circle(self) -> Circle:
-        """Creates a circle with all parameters larger than default one, for unit testing"""
-        return Circle(self.r + 2, self.x + 2, self.y + 2)
+    def create_circle(self, r_mul: (int | float) = 1, x_mul: (int | float) = 1, y_mul: (int | float) = 1) -> Circle:
+        """Creates a default circle, for unit testing, 
+        
+        Created circle uses r, x, y values defined in setUp method, those values are multiplied by input r_mul, x_mul, y_mul values (default 1)"""
+        return Circle(self.r * r_mul, self.x * x_mul, self.y * y_mul)
 
     # ----- Tests -----
     # test creation of shape with expected values:
@@ -61,8 +55,8 @@ class TestCircle(unittest.TestCase): # TestCircle sub-class of TestCase
     def test_equality_operator(self):
         """Testing equal (==) operator on Circles"""
         c_normal = self.create_circle()
-        c_small = self.create_small_circle()
-        c_large = self.create_large_circle()
+        c_small = self.create_circle(.5, .5, .5)
+        c_large = self.create_circle(2, 2, 2)
 
         self.assertEqual(c_normal, c_normal)
         self.assertNotEqual(c_normal, c_small)
@@ -71,8 +65,8 @@ class TestCircle(unittest.TestCase): # TestCircle sub-class of TestCase
     def test_lesser_than_operator(self):
         """Testing lesser than (<) operator on Circles"""
         c_normal = self.create_circle()
-        c_small = self.create_small_circle()
-        c_large = self.create_large_circle()
+        c_small = self.create_circle(.5, .5, .5)
+        c_large = self.create_circle(2, 2, 2)
 
         self.assertLess(c_normal, c_large)
         self.assertLess(c_small, c_normal)
@@ -81,8 +75,8 @@ class TestCircle(unittest.TestCase): # TestCircle sub-class of TestCase
     def test_greater_than_operator(self):
         """Testing greater than (>) operator on Circles"""
         c_normal = self.create_circle()
-        c_small = self.create_small_circle()
-        c_large = self.create_large_circle()
+        c_small = self.create_circle(.5, .5, .5)
+        c_large = self.create_circle(2, 2, 2)
 
         self.assertGreater(c_normal, c_small)
         self.assertGreater(c_large, c_normal)
@@ -91,8 +85,8 @@ class TestCircle(unittest.TestCase): # TestCircle sub-class of TestCase
     def test_lesser_equal_operator(self):
         """Testing lesser or equal (<=) operator on Circles"""
         c_normal = self.create_circle()
-        c_small = self.create_small_circle()
-        c_large = self.create_large_circle()
+        c_small = self.create_circle(.5, .5, .5)
+        c_large = self.create_circle(2, 2, 2)
 
         self.assertLessEqual(c_large, c_large)
         self.assertLessEqual(c_normal, c_large)
@@ -104,8 +98,8 @@ class TestCircle(unittest.TestCase): # TestCircle sub-class of TestCase
     def test_greater_equal_operator(self):
         """Testing greater or equal (>=) operator on Circles"""
         c_normal = self.create_circle()
-        c_small = self.create_small_circle()
-        c_large = self.create_large_circle()
+        c_small = self.create_circle(.5, .5, .5)
+        c_large = self.create_circle(2, 2, 2)
 
         self.assertGreaterEqual(c_large, c_large)
         self.assertGreaterEqual(c_large, c_normal)
