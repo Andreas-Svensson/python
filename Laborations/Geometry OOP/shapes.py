@@ -101,8 +101,6 @@ class Circle(Shape): # sub-class inheriting from Shape
 
         super().__init__(x_pos, y_pos) # x and y coordinates handled in super class
         self.radius = radius # radius of circle, default 1
-        self.area = self.calculate_area()
-        self.circumference = self.calculate_circumference()
 
     # ----- Properties -----
     @property
@@ -113,24 +111,17 @@ class Circle(Shape): # sub-class inheriting from Shape
     @radius.setter
     def radius(self, value: (int | float)):
         self._radius = self.check_measurement(value)  # error handling through check_measurement method
+        self.update_values() # update values based on radius whenever radius is changed
 
     @property
     def area(self) -> (int | float):
         """Area of circle"""
         return self._area
 
-    @area.setter
-    def area(self, value):
-        self._area = value
-
     @property
     def circumference(self) -> (int | float):
         """Circumference of circle"""
         return self._circumference
-
-    @circumference.setter
-    def circumference(self, value):
-        self._circumference = value
 
     # ----- Other methods -----
     def is_unit_circle(self) -> bool:
@@ -139,6 +130,10 @@ class Circle(Shape): # sub-class inheriting from Shape
             return True
         else:
             return False
+
+    def update_values(self):
+        self._area = self.calculate_area()
+        self._circumference = self.calculate_circumference()
 
     def calculate_area(self) -> float:
         """Calculates area of circle"""
@@ -264,34 +259,65 @@ class Rectangle(Shape): # sub-class inheriting from Shape
         """Describes self as a string for printing"""
         return f"Rectangle in position x: {self.x}, y: {self.y}, with width: {self.width}, height: {self.height}, area: {self.area}, perimeter: {self.perimeter}"
 
-class Sphere(Shape): # sub-class inheriting from Shape
+class Sphere(Circle): # sub-class inheriting from Shape
     """Class for geometrical shapes of type Sphere, sub-class of Shape"""
     def __init__(self,  radius: (int | float) = 1, 
                         x:  (int | float) = 0, 
                         y:  (int | float) = 0, 
                         z:  (int | float) = 0) -> None:
 
-        super().__init__(x, y)  # x and y coordinates handled in super class
-        self.radius = radius    # radius of sphere,     default 1
-        self.z = z              # z-coord of sphere,    default 0
-        # TODO self.area
-        # TODO self.circumference
-        # TODO self.volume
+        super().__init__(radius, x, y)  # x and y coordinates handled in super class
+        self.z = z              # z-coord of sphere, default 0
 
     # ----- Properties -----
-    # TODO @property
-    # TODO @radius.setter # containing error handling
+    @property
+    def z(self) -> (int | float):
+        """z-position of shape"""
+        return self._z
+    
+    @z.setter
+    def z(self, value: (int | float)):
+        self._z = self.check_coordinate(value) # error handling through check_coordinate method
 
-    # TODO @property
-    # TODO @z_pos.setter # containing error handling
+    @property
+    def surface_area(self) -> (int | float):
+        """Surface area of shape"""
+        return self._surface_area
+    
+    @property
+    def volume(self) -> (int | float):
+        """Volume area of shape"""
+        return self._volume
 
     # ----- Methods -----
-    # TODO is_unit_sphere
-    # TODO calculate_area
-    # TODO calculate_circumference
-    # TODO calculate volume
-    # TODO override move_to -> super move to x, y
-    # TODO contains_point
+    def is_unit_shape(self) -> bool:
+        if super().is_unit_circle() and self.z == 0:
+            return True
+        else:
+            return False
+
+    def update_values(self):
+        self._surface_area = self.calculate_surface_area()
+        self._volume = self.calculate_volume()
+
+    def calculate_surface_area(self) -> float:
+        surface_area = 4 * self.calculate_area()
+        return surface_area
+
+    def calculate_volume(self) -> float:
+        volume = (4/3) * pi * self.radius**3
+        return volume
+
+    def translate(self, x: (int | float) = 0, y: (int | float) = 0, z: (int | float) = 0):
+        super().translate(x, y)
+        self.z += z
+
+    def contains_point(self, x: (int | float), y: (int | float), z: (int | float)) -> bool:
+        if super().contains_point(x, y) and dist(self.z, z) <= self.radius:
+            return True
+        else:
+            return False
+
     # TODO plot
 
     # ----- String representation -----
