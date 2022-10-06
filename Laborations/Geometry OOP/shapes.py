@@ -1,4 +1,6 @@
 from __future__ import annotations # for type hinting with classes and |-operators
+import matplotlib.patches as patches
+import matplotlib.pyplot as plt
 from math import pi, dist
 
 class Shape: # super class of geometrical shapes
@@ -156,7 +158,10 @@ class Circle(Shape): # sub-class inheriting from Shape
         else:
             return False # point is outside circle
 
-    # TODO plot
+    def plot(self, ax):
+        """Adds Circle patch object to ax"""
+        ax.add_patch(patches.Circle((self.x, self.y), self.radius))
+        return ax
 
     # ----- String representation -----
     def __repr__(self) -> str:
