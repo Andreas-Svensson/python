@@ -251,7 +251,7 @@ class Sphere(Circle): # sub-class inheriting from Shape
         self.z += z
 
     def contains_point(self, x: (int | float), y: (int | float), z: (int | float)) -> bool:
-        if super().contains_point(x, y) and dist(self.z, z) <= self.radius: # TODO better to calculate all here?
+        if dist((self.x, self.y, self.z), (x, y, z)) <= self.radius:
             return True
         else:
             return False
