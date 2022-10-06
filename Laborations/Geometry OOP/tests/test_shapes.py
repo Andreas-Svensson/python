@@ -16,11 +16,12 @@ from shapes import *
     # ----- Tests to run -----
 class TestCircle(unittest.TestCase): # TestCircle sub-class of TestCase
 
-    # ----- Attributes used later on, to avoid repeating -----
+    # ----- Attribute values -----
     def setUp(self):
+        """Specifies values to use in creation of default test circles"""
         self.r, self.x, self.y = 2, 3, 4 # TODO go through variety of values to test
 
-    # ----- Default shape for unit testing -----
+    # ----- Default circle for unit testing -----
     def create_circle(self, r_mul: (int | float) = 1, x_mul: (int | float) = 1, y_mul: (int | float) = 1) -> Circle:
         """Creates a default circle, for unit testing, 
         
@@ -28,19 +29,15 @@ class TestCircle(unittest.TestCase): # TestCircle sub-class of TestCase
         return Circle(self.r * r_mul, self.x * x_mul, self.y * y_mul)
 
     # ----- Tests -----
-    # test creation of shape with expected values:
     def test_create_circle(self):
         """Testing if Circle instance is created with expected values"""
         c = self.create_circle()
         self.assertEqual(c.radius,  self.r)
-        self.assertEqual(c.x,   self.x)
-        self.assertEqual(c.y,   self.y)
+        self.assertEqual(c.x,       self.x)
+        self.assertEqual(c.y,       self.y)
 
-    def test_create_circle_empty(self):
-        c = Circle()
-
-    # test creation of shape with invalid parameters:
-    def test_create_circle_string(self): # TODO is there a way to do this for more values without manually typing all of them out?
+    # ----- Testing creating circles with invalid argument values -----
+    def test_create_circle_string(self):
         """Testing if creating Circle with string parameter raises TypeError"""
         self.assertRaises(TypeError, Circle, "1", 1, 1)
         self.assertRaises(TypeError, Circle, 1, "1", 1)
@@ -51,7 +48,7 @@ class TestCircle(unittest.TestCase): # TestCircle sub-class of TestCase
         self.assertRaises(ValueError, Circle, 0, 1, 1)
         self.assertRaises(ValueError, Circle, -1, 1, 1)
 
-    # test comparisons of area:
+    # ----- Testing comparison operators (comparing area) -----
     def test_equality_operator(self):
         """Testing equal (==) operator on Circles"""
         c_normal = self.create_circle()
@@ -107,7 +104,7 @@ class TestCircle(unittest.TestCase): # TestCircle sub-class of TestCase
         self.assertGreaterEqual(c_normal, c_normal)
         self.assertGreaterEqual(c_normal, c_small)
 
-    # test of other methods:
+    # ----- Testing other methods -----
     def test_is_unit_circle(self):
         """Testing if circle is unit circle (circle with radius 1 centered in origo)"""
         c = self.create_circle()
@@ -123,14 +120,14 @@ class TestCircle(unittest.TestCase): # TestCircle sub-class of TestCase
     def test_calculate_area(self):
         """Testing if area of circle is calculated correctly"""
         c = self.create_circle()
-        self.assertEqual(c.calculate_area(), (pi * self.r ** 2))
+        self.assertEqual(c.area, (pi * self.r ** 2))
 
     def test_calculate_circumference(self):
         """Testing if circumference of circle is calculated correctly"""
         c = self.create_circle()
-        self.assertEqual(c.calculate_circumference(), (2 * pi * self.r))
+        self.assertEqual(c.circumference, (2 * pi * self.r))
 
-    def test_move_to(self):
+    def test_translate(self):
         """Testing if translate (x,y) works as expected"""
         c1 = self.create_circle()
         c1.translate(2, 2)
