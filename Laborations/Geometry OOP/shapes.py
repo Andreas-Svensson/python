@@ -189,6 +189,7 @@ class Rectangle(Shape): # sub-class inheriting from Shape
     @width.setter
     def width(self, value: (int | float)):
         self._width = self.check_measurement(value)  # error handling through check_measurement method
+        self.update_values()
 
     @property
     def height(self) -> (int | float):
@@ -198,6 +199,7 @@ class Rectangle(Shape): # sub-class inheriting from Shape
     @height.setter
     def height(self, value: (int | float)):
         self._height = self.check_measurement(value)  # error handling through check_measurement method
+        self.update_values()
 
     @property
     def area(self) -> (int | float):
@@ -218,12 +220,16 @@ class Rectangle(Shape): # sub-class inheriting from Shape
         self._perimeter = value
 
     # ----- Other methods -----
-    def is_square(self) -> bool:
+    def is_equilateral(self) -> bool:
         """Checks if Rectangle is a square"""
         if self.width == self.height:
             return True
         else:
             return False
+
+    def update_values(self):
+        self._area = self.calculate_area()
+        self._perimeter = self.calculate_perimeter()
 
     def calculate_area(self) -> (int | float):
         """Calculates area of rectangle"""
@@ -313,7 +319,7 @@ class Sphere(Circle): # sub-class inheriting from Shape
         self.z += z
 
     def contains_point(self, x: (int | float), y: (int | float), z: (int | float)) -> bool:
-        if super().contains_point(x, y) and dist(self.z, z) <= self.radius:
+        if super().contains_point(x, y) and dist(self.z, z) <= self.radius: # TODO better to calculate all here?
             return True
         else:
             return False
@@ -324,7 +330,7 @@ class Sphere(Circle): # sub-class inheriting from Shape
     # TODO __repr__
     # TODO __str__
     
-class Cuboid(Shape): # sub-class inheriting from Shape
+class Cuboid(Rectangle): # sub-class inheriting from Shape
     """Class for geometrical shapes of type Cuboid, sub-class of Shape"""
     def __init__(self,  width:  (int | float) = 1, 
                         height: (int | float) = 1, 
@@ -333,35 +339,59 @@ class Cuboid(Shape): # sub-class inheriting from Shape
                         y:      (int | float) = 0, 
                         z:      (int | float) = 0) -> None:
 
-        super().__init__(x, y)  # x and y coordinates handled in super class
-        self.width = width      # width of cuboid,    default 1
-        self.height = height    # height of cuboid,   default 1
+        super().__init__(width, height, x, y)  # width, height, and x, y coordinates handled in super class
         self.length = length    # length of cuboid,   default 1
         self.z = z              # z-coord of cuboid,  default 0
-        # TODO self.area
-        # TODO self.circumference
-        # TODO self.volume
 
     # ----- Properties -----
-    # TODO @property
-    # TODO @width.setter # containing error handling
+    @property
+    def length(self):
+        return self._length
+    
+    @length.setter
+    def length(self, value):
+        self._length = self.check_measurement(value)
+        self.update_values()
+    
+    @property
+    def z(self):
+        return self._z
 
-    # TODO @property
-    # TODO @height.setter # containing error handling
-
-    # TODO @property
-    # TODO @length.setter # containing error handling
-
-    # TODO @property
-    # TODO @z_pos.setter # containing error handling
+    @z.setter
+    def z(self, value):
+        self._z = self.check_coordinate(value)
 
     # ----- Methods -----
-    # TODO is_cube
-    # TODO calculate_area
-    # TODO calculate_circumference
-    # TODO calculate volume
-    # TODO override move_to -> super move to x, y
-    # TODO contains_point
+    def is_equilateral(self):
+        """Checks if Cuboid is a Cube"""
+        if self.width == self. height and self.width == self.length:
+            return True
+        else:
+            return False
+        
+    def update_values(self):
+        self._surface_area = self.calculate_surface_area()
+        self._volume = self.calculate_volume
+
+    def calculate_surface_area(self):
+        surface_area = super().calculate_area() * 6
+        return surface_area
+
+    def calculate_volume(self):
+        volume = self.width * self.height * self.length
+        return volume
+
+    def translate(self, x: (int | float) = 0, y: (int | float) = 0, z: (int | float) = 0) -> None:
+        super().translate(x, y) # TODO better to calculate all here?
+        self.z += z
+
+    def contains_point(self, x: (int | float), y: (int | float), z: (int | float)) -> bool:
+        length_range = self.length / 2
+        if super().contains_point(x, y) and self.z - length_range <= z <= self.z + length_range:
+            return True
+        else:
+            return False
+
     # TODO plot
 
     # ----- String representation -----
