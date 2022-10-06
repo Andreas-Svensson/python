@@ -48,38 +48,23 @@ class Shape: # super class of geometrical shapes
     # ----- Operator overloading for Shape class -----
     def __eq__(self, other: Shape) -> bool:
         """Override of equal (==) operator for all shapes"""
-        if isinstance(other, type(self)): # if same class
-            return self.area == other.area
-        else:
-            return False
+        return self.area == other.area
 
     def __lt__(self, other: Shape) -> bool:
         """Override of lesser than (<) operator for all shapes"""
-        if isinstance(other, type(self)): # if same class
-            return self.area < other.area
-        else:
-            return False
+        return self.area < other.area
             
     def __gt__(self, other: Shape) -> bool:
         """Override of greater than (>) operator for all shapes"""
-        if isinstance(other, type(self)): # if same class
-            return self.area > other.area
-        else:
-            return False
+        return self.area > other.area
 
     def __le__(self, other: Shape) -> bool:
         """Override of lesser or equal (<=) operator for all shapes"""
-        if isinstance(other, type(self)): # if same class
-            return self.area <= other.area
-        else:
-            return False
+        return self.area <= other.area
 
     def __ge__(self, other: Shape) -> bool:
         """Override of greater or equal (>=) operator for all shapes"""
-        if isinstance(other, type(self)): # if same class
-            return self.area >= other.area
-        else:
-            return False
+        return self.area >= other.area
 
     # ----- Other methods -----
     def translate(self, x: (int | float) = 0, y: (int | float) = 0) -> None:
@@ -227,9 +212,9 @@ class Rectangle(Shape): # sub-class inheriting from Shape
 class Sphere(Circle): # sub-class inheriting from Shape
     """Class for geometrical shapes of type Sphere, sub-class of Shape"""
     def __init__(self,  radius: (int | float) = 1, 
-                        x:  (int | float) = 0, 
-                        y:  (int | float) = 0, 
-                        z:  (int | float) = 0) -> None:
+                            x:  (int | float) = 0, 
+                            y:  (int | float) = 0, 
+                            z:  (int | float) = 0) -> None:
 
         super().__init__(radius, x, y)  # x and y coordinates handled in super class
         self.z = z              # z-coord of sphere, default 0
@@ -245,9 +230,9 @@ class Sphere(Circle): # sub-class inheriting from Shape
         self._z = self.check_coordinate(value) # error handling through check_coordinate method
 
     @property
-    def surface_area(self) -> (int | float):
+    def area(self) -> (int | float):
         """Surface area of shape"""
-        return 4 * self.area
+        return 4 * super().area
     
     @property
     def volume(self) -> (int | float):
@@ -297,7 +282,7 @@ class Cuboid(Rectangle): # sub-class inheriting from Shape
     
     @length.setter
     def length(self, value):
-        self._length = self.check_measurement(value)
+        self._length = self.check_measurement(value) # error handling through check_measurement method
     
     @property
     def z(self):
@@ -305,10 +290,10 @@ class Cuboid(Rectangle): # sub-class inheriting from Shape
 
     @z.setter
     def z(self, value):
-        self._z = self.check_coordinate(value)
+        self._z = self.check_coordinate(value) # error handling through check_coordinate method
 
     @property
-    def surface_area(self):
+    def area(self):
         return 2 * (self.width * self.height + self.height * self.length + self.length * self.width)
 
     @property
