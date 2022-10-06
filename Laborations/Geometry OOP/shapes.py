@@ -111,17 +111,16 @@ class Circle(Shape): # sub-class inheriting from Shape
     @radius.setter
     def radius(self, value: (int | float)):
         self._radius = self.check_measurement(value)  # error handling through check_measurement method
-        self.update_values() # update values based on radius whenever radius is changed
 
     @property
     def area(self) -> (int | float):
         """Area of circle"""
-        return self._area
+        return pi * self.radius ** 2
 
     @property
     def circumference(self) -> (int | float):
         """Circumference of circle"""
-        return self._circumference
+        return 2 * pi * self.radius
 
     # ----- Other methods -----
     def is_unit_circle(self) -> bool:
@@ -130,20 +129,6 @@ class Circle(Shape): # sub-class inheriting from Shape
             return True
         else:
             return False
-
-    def update_values(self):
-        self._area = self.calculate_area()
-        self._circumference = self.calculate_circumference()
-
-    def calculate_area(self) -> float:
-        """Calculates area of circle"""
-        area = pi * self.radius ** 2
-        return area
-
-    def calculate_circumference(self) -> float:
-        """Calculates circumference of circle"""
-        area = 2 * pi * self.radius
-        return area
 
     def contains_point(self, x: (int | float), y: (int | float)) -> bool:
         """Check if circle contains a given point"""
@@ -177,8 +162,6 @@ class Rectangle(Shape): # sub-class inheriting from Shape
         super().__init__(x, y)  # x and y coordinates handled in super class
         self.width = width      # width of rectangle,   default 1
         self.height = height    # height of rectangle,  default 1
-        self.area = self.calculate_area()
-        self.perimeter = self.calculate_perimeter()
 
     # ----- Properties -----
     @property
@@ -189,7 +172,6 @@ class Rectangle(Shape): # sub-class inheriting from Shape
     @width.setter
     def width(self, value: (int | float)):
         self._width = self.check_measurement(value)  # error handling through check_measurement method
-        self.update_values()
 
     @property
     def height(self) -> (int | float):
@@ -199,25 +181,16 @@ class Rectangle(Shape): # sub-class inheriting from Shape
     @height.setter
     def height(self, value: (int | float)):
         self._height = self.check_measurement(value)  # error handling through check_measurement method
-        self.update_values()
 
     @property
     def area(self) -> (int | float):
         """Area of rectangle"""
-        return self._area
-
-    @area.setter
-    def area(self, value: (int | float)):
-        self._area = value
+        return self.width * self.height
 
     @property
     def perimeter(self) -> (int | float):
         """Perimeter of rectangle"""
-        return self._perimeter
-
-    @perimeter.setter
-    def perimeter(self, value: (int | float)):
-        self._perimeter = value
+        return self.width * 2 + self.height * 2
 
     # ----- Other methods -----
     def is_equilateral(self) -> bool:
@@ -226,20 +199,6 @@ class Rectangle(Shape): # sub-class inheriting from Shape
             return True
         else:
             return False
-
-    def update_values(self):
-        self._area = self.calculate_area()
-        self._perimeter = self.calculate_perimeter()
-
-    def calculate_area(self) -> (int | float):
-        """Calculates area of rectangle"""
-        area = self.width * self.height
-        return area
-
-    def calculate_perimeter(self) -> (int | float):
-        """Calculates perimeter of rectangle"""
-        perimeter = self.width * 2 + self.height * 2
-        return perimeter
 
     def contains_point(self, x: (int | float), y: (int | float)) -> bool:
         """Check if rectangle contains a given point"""
@@ -288,12 +247,12 @@ class Sphere(Circle): # sub-class inheriting from Shape
     @property
     def surface_area(self) -> (int | float):
         """Surface area of shape"""
-        return self._surface_area
+        return 4 * self.area
     
     @property
     def volume(self) -> (int | float):
         """Volume area of shape"""
-        return self._volume
+        return (4/3) * pi * self.radius**3
 
     # ----- Methods -----
     def is_unit_shape(self) -> bool:
@@ -301,18 +260,6 @@ class Sphere(Circle): # sub-class inheriting from Shape
             return True
         else:
             return False
-
-    def update_values(self):
-        self._surface_area = self.calculate_surface_area()
-        self._volume = self.calculate_volume()
-
-    def calculate_surface_area(self) -> float:
-        surface_area = 4 * self.calculate_area()
-        return surface_area
-
-    def calculate_volume(self) -> float:
-        volume = (4/3) * pi * self.radius**3
-        return volume
 
     def translate(self, x: (int | float) = 0, y: (int | float) = 0, z: (int | float) = 0):
         super().translate(x, y)
@@ -351,7 +298,6 @@ class Cuboid(Rectangle): # sub-class inheriting from Shape
     @length.setter
     def length(self, value):
         self._length = self.check_measurement(value)
-        self.update_values()
     
     @property
     def z(self):
@@ -361,25 +307,25 @@ class Cuboid(Rectangle): # sub-class inheriting from Shape
     def z(self, value):
         self._z = self.check_coordinate(value)
 
+    @property
+    def surface_area(self):
+        return 2 * (self.width * self.height + self.height * self.length + self.length * self.width)
+
+    @property
+    def volume(self):
+        return self.width * self.height * self.length
+
+    @property
+    def perimeter(self):
+        return (self.width * 4) + (self.height * 4) + (self.length * 4)
+
     # ----- Methods -----
     def is_equilateral(self):
         """Checks if Cuboid is a Cube"""
-        if self.width == self. height and self.width == self.length:
+        if self.width == self.height and self.width == self.length:
             return True
         else:
             return False
-        
-    def update_values(self):
-        self._surface_area = self.calculate_surface_area()
-        self._volume = self.calculate_volume
-
-    def calculate_surface_area(self):
-        surface_area = super().calculate_area() * 6
-        return surface_area
-
-    def calculate_volume(self):
-        volume = self.width * self.height * self.length
-        return volume
 
     def translate(self, x: (int | float) = 0, y: (int | float) = 0, z: (int | float) = 0) -> None:
         super().translate(x, y) # TODO better to calculate all here?
