@@ -11,7 +11,7 @@ path_to_vector_module = os.path.abspath("../")
 
 sys.path.append(path_to_vector_module)
 
-from shapes import *
+from shapes import Circle, Rectangle, Sphere, Cuboid
 
 # ----- Tests to run -----
 class TestCircle(unittest.TestCase): # TestCircle sub-class of TestCase
@@ -606,6 +606,112 @@ class TestCuboid(unittest.TestCase): # TestCuboid sub-class of TestCase
         self.assertFalse(c.contains_point(self.x + self.w / .9, self.y - self.h / .9, self.z - self.l / .9)) # bottom corner 2
         self.assertFalse(c.contains_point(self.x - self.w / .9, self.y - self.h / .9, self.z + self.l / .9)) # bottom corner 3
         self.assertFalse(c.contains_point(self.x - self.w / .9, self.y - self.h / .9, self.z - self.l / .9)) # bottom corner 4
+
+class TestShapeInteractions(unittest.TestCase):
+    # ----- Attribute values -----
+    def setUp(self):
+        """Specifies values to use in creation of default test cuboids"""
+        self.r, self.w, self.h, self.l = 1, 1, 1, 1 # measurements (must be above 0)
+        self.x, self.y, self.z = 0, 0, 0 # coordinates
+
+    # ----- Default circle for unit testing -----
+    def create_circle(self, r_mul: (int | float) = 1, x_mul: (int | float) = 1, y_mul: (int | float) = 1) -> Circle:
+        """Creates a default circle, for unit testing, 
+        
+        Created circle uses r, x, y values defined in setUp method, those values are multiplied by input r_mul, x_mul, y_mul values (default 1)"""
+        return Circle(self.r * r_mul, self.x * x_mul, self.y * y_mul)
+
+    # ----- Default rectangle for unit testing -----
+    def create_rectangle(self, w_mul: (int | float) = 1, h_mul: (int | float) = 1, x_mul: (int | float) = 1, y_mul: (int | float) = 1) -> Rectangle:
+        """Creates a default rectangle, for unit testing, 
+        
+        Created rectangle uses r, x, y values defined in setUp method, those values are multiplied by input r_mul, x_mul, y_mul values (default 1)"""
+        return Rectangle(self.w * w_mul, self.h * h_mul, self.x * x_mul, self.y * y_mul)
+    
+    # ----- Default sphere for unit testing -----
+    def create_sphere(self, r_mul: (int | float) = 1, x_mul: (int | float) = 1, y_mul: (int | float) = 1, z_mul: (int | float) = 1) -> Sphere:
+        """Creates a default sphere, for unit testing, 
+        
+        Created sphere uses r, x, y, z values defined in setUp method, those values are multiplied by input r_mul, x_mul, y_mul, z_mul values (default 1)"""
+        return Sphere(self.r * r_mul, self.x * x_mul, self.y * y_mul, self.z * z_mul)
+
+    # ----- Default cuboid for unit testing -----
+    def create_cuboid(self, w_mul: (int | float) = 1, h_mul: (int | float) = 1, l_mul: (int | float) = 1, x_mul: (int | float) = 1, y_mul: (int | float) = 1, z_mul: (int | float) = 1) -> Cuboid:
+        """Creates a default cuboid, for unit testing, 
+        
+        Created cuboid uses w, h, l, x, y, z values defined in setUp method, those values are multiplied by input w_mul, h_mul, l_mul x_mul, y_mul, z_mul values (default 1)"""
+        return Cuboid(self.w * w_mul, self.h * h_mul, self.l * l_mul, self.x * x_mul, self.y * y_mul, self.z * z_mul)
+
+    # ----- Tests -----
+    def test_equality_operator(self):
+        """Testing equality (==) operator between different shape types"""
+        circle1 =       self.create_circle()
+        rectangle1 =    self.create_rectangle()
+        sphere1 =       self.create_sphere()
+        cuboid1 =       self.create_cuboid()
+        # testing equality between all combination of shape classes
+        self.assertFalse(circle1    == rectangle1)
+        self.assertFalse(circle1    == sphere1)
+        self.assertFalse(circle1    == cuboid1)
+        self.assertFalse(rectangle1 == sphere1)
+        self.assertFalse(rectangle1 == cuboid1)
+        self.assertFalse(sphere1    == cuboid1)
+
+    def test_lesser_than_operator(self):
+        """Testing lesser than (<) operator between different shape types"""
+        circle1 =       self.create_circle()
+        rectangle1 =    self.create_rectangle()
+        sphere1 =       self.create_sphere()
+        cuboid1 =       self.create_cuboid()
+        # testing lesser than between all combination of shape classes
+        self.assertFalse(circle1    < rectangle1)
+        self.assertTrue(circle1     < sphere1)
+        self.assertTrue(circle1     < cuboid1)
+        self.assertTrue(rectangle1  < sphere1)
+        self.assertTrue(rectangle1  < cuboid1)
+        self.assertFalse(sphere1    < cuboid1)
+
+    def test_greater_than_operator(self):
+        """Testing greater than (>) operator between different shape types"""
+        circle1 =       self.create_circle()
+        rectangle1 =    self.create_rectangle()
+        sphere1 =       self.create_sphere()
+        cuboid1 =       self.create_cuboid()
+        # testing greater than between all combination of shape classes
+        self.assertTrue(circle1     > rectangle1)
+        self.assertFalse(circle1    > sphere1)
+        self.assertFalse(circle1    > cuboid1)
+        self.assertFalse(rectangle1 > sphere1)
+        self.assertFalse(rectangle1 > cuboid1)
+        self.assertTrue(sphere1     > cuboid1)
+
+    def test_lesser_equal_operator(self):
+        """Testing lesser equal than (<=) operator between different shape types"""
+        circle1 =       self.create_circle()
+        rectangle1 =    self.create_rectangle()
+        sphere1 =       self.create_sphere()
+        cuboid1 =       self.create_cuboid()
+        # testing lesser equal than between all combination of shape classes
+        self.assertFalse(circle1     <= rectangle1)
+        self.assertTrue(circle1    <= sphere1)
+        self.assertTrue(circle1    <= cuboid1)
+        self.assertTrue(rectangle1 <= sphere1)
+        self.assertTrue(rectangle1 <= cuboid1)
+        self.assertFalse(sphere1     <= cuboid1)
+
+    def test_greater_equal_operator(self):
+        """Testing greater equal than (>=) operator between different shape types"""
+        circle1 =       self.create_circle()
+        rectangle1 =    self.create_rectangle()
+        sphere1 =       self.create_sphere()
+        cuboid1 =       self.create_cuboid()
+        # testing greater equal than between all combination of shape classes
+        self.assertTrue(circle1     >= rectangle1)
+        self.assertFalse(circle1    >= sphere1)
+        self.assertFalse(circle1    >= cuboid1)
+        self.assertFalse(rectangle1 >= sphere1)
+        self.assertFalse(rectangle1 >= cuboid1)
+        self.assertTrue(sphere1     >= cuboid1)
 
 if __name__ == "__main__": # execute following code if run from this file:
     unittest.main()
