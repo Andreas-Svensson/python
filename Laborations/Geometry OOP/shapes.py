@@ -209,15 +209,15 @@ class Rectangle(Shape): # sub-class inheriting from Shape
         """Describes self as a string for printing"""
         return f"Rectangle in position x: {self.x}, y: {self.y}, with width: {self.width}, height: {self.height}, area: {self.area}, perimeter: {self.perimeter}"
 
-class Sphere(Circle): # sub-class inheriting from Shape
-    """Class for geometrical shapes of type Sphere, sub-class of Shape"""
+class Sphere(Circle): # sub-class inheriting from Circle
+    """Class for geometrical shapes of type Sphere, sub-class of Circle"""
     def __init__(self,  radius: (int | float) = 1, 
                             x:  (int | float) = 0, 
                             y:  (int | float) = 0, 
                             z:  (int | float) = 0) -> None:
 
-        super().__init__(radius, x, y)  # x and y coordinates handled in super class
-        self.z = z              # z-coord of sphere, default 0
+        super().__init__(radius, x, y)  # radius and x, y coordinates handled in super classes
+        self.z = z # z-coord of sphere, default 0
 
     # ----- Properties -----
     @property
@@ -262,8 +262,8 @@ class Sphere(Circle): # sub-class inheriting from Shape
     # TODO __repr__
     # TODO __str__
     
-class Cuboid(Rectangle): # sub-class inheriting from Shape
-    """Class for geometrical shapes of type Cuboid, sub-class of Shape"""
+class Cuboid(Rectangle): # sub-class inheriting from Rectangle
+    """Class for geometrical shapes of type Cuboid, sub-class of Rectangle"""
     def __init__(self,  width:  (int | float) = 1, 
                         height: (int | float) = 1, 
                         length: (int | float) = 1, 
@@ -271,7 +271,7 @@ class Cuboid(Rectangle): # sub-class inheriting from Shape
                         y:      (int | float) = 0, 
                         z:      (int | float) = 0) -> None:
 
-        super().__init__(width, height, x, y)  # width, height, and x, y coordinates handled in super class
+        super().__init__(width, height, x, y)  # width, height, and x, y coordinates handled in super classes
         self.length = length    # length of cuboid,   default 1
         self.z = z              # z-coord of cuboid,  default 0
 
