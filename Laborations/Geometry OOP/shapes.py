@@ -156,7 +156,7 @@ class Rectangle(Shape): # sub-class inheriting from Shape
 
     @width.setter
     def width(self, value: (int | float)):
-        self._width = self.check_measurement(value)  # error handling through check_measurement method
+        self._width = self.check_measurement(value) # error handling through check_measurement method
 
     @property
     def height(self) -> (int | float):
@@ -165,7 +165,7 @@ class Rectangle(Shape): # sub-class inheriting from Shape
 
     @height.setter
     def height(self, value: (int | float)):
-        self._height = self.check_measurement(value)  # error handling through check_measurement method
+        self._height = self.check_measurement(value) # error handling through check_measurement method
 
     @property
     def area(self) -> (int | float):
@@ -259,8 +259,15 @@ class Sphere(Circle): # sub-class inheriting from Circle
     # TODO plot
 
     # ----- String representation -----
-    # TODO __repr__
-    # TODO __str__
+    def __repr__(self) -> str:
+        """"Describes self as a string"""
+        return f"Rectangle(x = {self.x}, y = {self.y}, z = {self.z}, radius = {self.radius})"
+
+    def __str__(self) -> str:
+        """Describes self as a string for printing"""
+        location = f"({self.x},{self.y},{self.z})"
+        return f"Sphere in location: {location}, with radius: {self.radius}, and area: {self.area}"
+
     
 class Cuboid(Rectangle): # sub-class inheriting from Rectangle
     """Class for geometrical shapes of type Cuboid, sub-class of Rectangle"""
@@ -326,5 +333,13 @@ class Cuboid(Rectangle): # sub-class inheriting from Rectangle
     # TODO plot
 
     # ----- String representation -----
-    # TODO __repr__
-    # TODO __str__
+    def __repr__(self) -> str:
+        """"Describes self as a string"""
+        return f"Rectangle(x = {self.x}, y = {self.y}, z = {self.z}, width = {self.width}, height = {self.height}, length = {self.length})"
+
+    def __str__(self) -> str:
+        """Describes self as a string for printing"""
+        location = f"({self.x},{self.y},{self.z})"
+        cuboid_type = "Cube" if self.is_equilateral() else "Cuboid"
+        sides = self.width if self.is_equilateral() else f"({self.width},{self.height},{self.length})"
+        return f"{cuboid_type} in location: {location}, with sides: {sides}, and area: {self.area}"
