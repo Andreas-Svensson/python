@@ -6,8 +6,8 @@ name = "pypi"
 [packages]
 ipykernel = "*"
 matplotlib = "*"
-black = "*"
 pygame = "*"
+black = {extras = ["jupyter"], version = "*"}
 
 [dev-packages]
 
