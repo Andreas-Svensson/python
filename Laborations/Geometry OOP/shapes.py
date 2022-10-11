@@ -213,46 +213,6 @@ class Rectangle(Shape):  # sub-class inheriting from Shape
             return True
         return False
 
-    def __lt__(self, other: Shape) -> bool:
-        """Override of lesser than (<) operator"""
-        if (
-            self.width == other.width
-            and self.height == other.height
-            and self.area == other.area
-        ):
-            return True
-        return False
-
-    def __gt__(self, other: Shape) -> bool:
-        """Override of greater than (>) operator"""
-        if (
-            self.width == other.width
-            and self.height == other.height
-            and self.area == other.area
-        ):
-            return True
-        return False
-
-    def __le__(self, other: Shape) -> bool:
-        """Override of lesser or equal (<=) operator"""
-        if (
-            self.width == other.width
-            and self.height == other.height
-            and self.area == other.area
-        ):
-            return True
-        return False
-
-    def __ge__(self, other: Shape) -> bool:
-        """Override of greater or equal (>=) operator"""
-        if (
-            self.width == other.width
-            and self.height == other.height
-            and self.area == other.area
-        ):
-            return True
-        return False
-
     # ----- Other methods -----
     def is_equilateral(self) -> bool:
         """Checks if Rectangle is a square"""
@@ -328,27 +288,6 @@ class Sphere(Circle):  # sub-class inheriting from Circle
     def volume(self) -> (int | float):
         """Volume area of shape"""
         return (4 / 3) * pi * self.radius**3
-
-    # ----- Operator overloading for Sphere class comparing volume -----
-    def __eq__(self, other: Shape) -> bool:
-        """Override of equal (==) operator"""
-        return self.volume == other.volume
-
-    def __lt__(self, other: Shape) -> bool:
-        """Override of lesser than (<) operator"""
-        return self.volume < other.volume
-
-    def __gt__(self, other: Shape) -> bool:
-        """Override of greater than (>) operator"""
-        return self.volume > other.volume
-
-    def __le__(self, other: Shape) -> bool:
-        """Override of lesser or equal (<=) operator"""
-        return self.volume <= other.volume
-
-    def __ge__(self, other: Shape) -> bool:
-        """Override of greater or equal (>=) operator"""
-        return self.volume >= other.volume
 
     # ----- Methods -----
     def is_unit_shape(self) -> bool:
@@ -454,40 +393,25 @@ class Cuboid(Rectangle):  # sub-class inheriting from Rectangle
 
     def __lt__(self, other: Shape) -> bool:
         """Override of lesser than (<) operator"""
-        if self.volume == other.volume:
+        if self.volume < other.volume:
             return True
         return False
 
     def __gt__(self, other: Shape) -> bool:
         """Override of greater than (>) operator"""
-        if (
-            self.width == other.width
-            and self.height == other.height
-            and self.length == other.length
-            and self.volume == other.volume
-        ):
+        if self.volume > other.volume:
             return True
         return False
 
     def __le__(self, other: Shape) -> bool:
         """Override of lesser or equal (<=) operator"""
-        if (
-            self.width == other.width
-            and self.height == other.height
-            and self.length == other.length
-            and self.volume == other.volume
-        ):
+        if self.volume <= other.volume:
             return True
         return False
 
     def __ge__(self, other: Shape) -> bool:
         """Override of greater or equal (>=) operator"""
-        if (
-            self.width == other.width
-            and self.height == other.height
-            and self.length == other.length
-            and self.volume == other.volume
-        ):
+        if self.volume >= other.volume:
             return True
         return False
 
