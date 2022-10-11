@@ -86,6 +86,21 @@ class Shape:  # super class of geometrical shapes
         self.x += x
         self.y += y
 
+    def plot_translation(self, ax, x: (int | float) = 0, y: (int | float) = 0) -> None:
+        """Translate shape and plot it visually"""
+        patch1 = plott(self)
+        patch1.set_alpha(0.5)
+        plt.text(self.x, self.y, "original")
+
+        ax.plot((self.x, x), (self.y, y), color="green")
+
+        self.translate(x, y)
+
+        patch2 = plott(self)
+        plt.text(self.x, self.y, "translated")
+
+        return patch1, patch2
+
     # ----- String representation -----
     def __repr__(self) -> str:
         return f"Shape(x_pos = {self.x}, y_pos = {self.y})"
@@ -149,10 +164,9 @@ class Circle(Shape):  # sub-class inheriting from Shape
         else:
             return False  # point is outside circle
 
-    def plot(self, ax):  # TODO type hinting
-        """Adds Circle patch object to ax"""
-        ax.add_patch(patches.Circle((self.x, self.y), self.radius))
-        return ax
+    def plot(self) -> patches.Patch:
+        """Returns patch containing circle"""
+        return patches.Circle((self.x, self.y), self.radius)
 
     # ----- String representation -----
     def __repr__(self) -> str:
@@ -248,10 +262,13 @@ class Rectangle(Shape):  # sub-class inheriting from Shape
         else:
             return False  # point is outside rectangle
 
-    def plot(self, ax):  # TODO type hinting
-        """Adds Rectangle patch object to ax"""
-        ax.add_patch(patches.Rectangle((self.x, self.y), self.width, self.height))
-        return ax
+    def plot(self) -> patches.Patch:
+        """Returns patch containing rectangle"""
+        x_center = self.x - (
+            self.width / 2
+        )  # removing half of shape's width and height from coords gives us bottom left coords
+        y_center = self.y - (self.height / 2)
+        return patches.Rectangle((x_center, y_center), self.width, self.height)
 
     # ----- String representation -----
     def __repr__(self) -> str:
