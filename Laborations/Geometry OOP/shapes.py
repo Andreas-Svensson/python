@@ -431,6 +431,8 @@ class Cuboid(Rectangle):  # sub-class inheriting from Rectangle
 
     def __ge__(self, other: Shape) -> bool:
         """Override of greater or equal (>=) operator"""
+        if not type(self) == type(other):
+            raise TypeError(f"Cannot compare Cuboid with shape of other type")
         if self.volume >= other.volume:
             return True
         return False

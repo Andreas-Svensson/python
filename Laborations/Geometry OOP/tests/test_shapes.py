@@ -815,75 +815,105 @@ class TestShapeInteractions(unittest.TestCase):
         )
 
     # # ----- Tests -----
-    # def test_equality_operator(self):
-    #     """Testing equality (==) operator between different shape types"""
-    #     circle1 =       self.create_circle()
-    #     rectangle1 =    self.create_rectangle()
-    #     sphere1 =       self.create_sphere()
-    #     cuboid1 =       self.create_cuboid()
-    #     # testing equality between all combination of shape classes
-    #     self.assertFalse(circle1    == rectangle1)
-    #     self.assertFalse(circle1    == sphere1)
-    #     self.assertFalse(circle1    == cuboid1)
-    #     self.assertFalse(rectangle1 == sphere1)
-    #     self.assertFalse(rectangle1 == cuboid1)
-    #     self.assertFalse(sphere1    == cuboid1)
+    def test_equality_operator(self):
+        """Testing equality (==) operator between different shape types (expecting error)"""
+        circle1 = self.create_circle()
+        rectangle1 = self.create_rectangle()
+        sphere1 = self.create_sphere()
+        cuboid1 = self.create_cuboid()
+        # testing equality between all combination of shape classes (expecting error)
+        with self.assertRaises(TypeError):
+            circle1 == rectangle1
+        with self.assertRaises(TypeError):
+            circle1 == sphere1
+        with self.assertRaises(TypeError):
+            circle1 == cuboid1
+        with self.assertRaises(TypeError):
+            rectangle1 == sphere1
+        with self.assertRaises(TypeError):
+            rectangle1 == cuboid1
+        with self.assertRaises(TypeError):
+            sphere1 == cuboid1
 
-    # def test_lesser_than_operator(self):
-    #     """Testing lesser than (<) operator between different shape types"""
-    #     circle1 =       self.create_circle()
-    #     rectangle1 =    self.create_rectangle()
-    #     sphere1 =       self.create_sphere()
-    #     cuboid1 =       self.create_cuboid()
-    #     # testing lesser than between all combination of shape classes
-    #     self.assertFalse(circle1    < rectangle1)
-    #     self.assertTrue(circle1     < sphere1)
-    #     self.assertTrue(circle1     < cuboid1)
-    #     self.assertTrue(rectangle1  < sphere1)
-    #     self.assertTrue(rectangle1  < cuboid1)
-    #     self.assertFalse(sphere1    < cuboid1)
+    def test_lesser_than_operator(self):
+        """Testing lesser than (<) operator between different shape types"""
+        circle1 = self.create_circle()
+        rectangle1 = self.create_rectangle()
+        sphere1 = self.create_sphere()
+        cuboid1 = self.create_cuboid()
+        # testing lesser than between all combination of shape classes
+        with self.assertRaises(TypeError):
+            circle1 < rectangle1
+        with self.assertRaises(TypeError):
+            circle1 < sphere1
+        with self.assertRaises(TypeError):
+            circle1 < cuboid1
+        with self.assertRaises(TypeError):
+            rectangle1 < sphere1
+        with self.assertRaises(TypeError):
+            rectangle1 < cuboid1
+        with self.assertRaises(TypeError):
+            sphere1 < cuboid1
 
-    # def test_greater_than_operator(self):
-    #     """Testing greater than (>) operator between different shape types"""
-    #     circle1 =       self.create_circle()
-    #     rectangle1 =    self.create_rectangle()
-    #     sphere1 =       self.create_sphere()
-    #     cuboid1 =       self.create_cuboid()
-    #     # testing greater than between all combination of shape classes
-    #     self.assertTrue(circle1     > rectangle1)
-    #     self.assertFalse(circle1    > sphere1)
-    #     self.assertFalse(circle1    > cuboid1)
-    #     self.assertFalse(rectangle1 > sphere1)
-    #     self.assertFalse(rectangle1 > cuboid1)
-    #     self.assertTrue(sphere1     > cuboid1)
+    def test_greater_than_operator(self):
+        """Testing greater than (>) operator between different shape types"""
+        circle1 = self.create_circle()
+        rectangle1 = self.create_rectangle()
+        sphere1 = self.create_sphere()
+        cuboid1 = self.create_cuboid()
+        # testing greater than between all combination of shape classes
+        with self.assertRaises(TypeError):
+            circle1 > rectangle1
+        with self.assertRaises(TypeError):
+            circle1 > sphere1
+        with self.assertRaises(TypeError):
+            circle1 > cuboid1
+        with self.assertRaises(TypeError):
+            rectangle1 > sphere1
+        with self.assertRaises(TypeError):
+            rectangle1 > cuboid1
+        with self.assertRaises(TypeError):
+            sphere1 > cuboid1
 
-    # def test_lesser_equal_operator(self):
-    #     """Testing lesser equal than (<=) operator between different shape types"""
-    #     circle1 =       self.create_circle()
-    #     rectangle1 =    self.create_rectangle()
-    #     sphere1 =       self.create_sphere()
-    #     cuboid1 =       self.create_cuboid()
-    #     # testing lesser equal than between all combination of shape classes
-    #     self.assertFalse(circle1     <= rectangle1)
-    #     self.assertTrue(circle1    <= sphere1)
-    #     self.assertTrue(circle1    <= cuboid1)
-    #     self.assertTrue(rectangle1 <= sphere1)
-    #     self.assertTrue(rectangle1 <= cuboid1)
-    #     self.assertFalse(sphere1     <= cuboid1)
+    def test_lesser_equal_operator(self):
+        """Testing lesser equal than (<=) operator between different shape types"""
+        circle1 = self.create_circle()
+        rectangle1 = self.create_rectangle()
+        sphere1 = self.create_sphere()
+        cuboid1 = self.create_cuboid()
+        # testing lesser equal than between all combination of shape classes
+        with self.assertRaises(TypeError):
+            circle1 <= rectangle1
+        with self.assertRaises(TypeError):
+            circle1 <= sphere1
+        with self.assertRaises(TypeError):
+            circle1 <= cuboid1
+        with self.assertRaises(TypeError):
+            rectangle1 <= sphere1
+        with self.assertRaises(TypeError):
+            rectangle1 <= cuboid1
+        with self.assertRaises(TypeError):
+            sphere1 <= cuboid1
 
-    # def test_greater_equal_operator(self):
-    #     """Testing greater equal than (>=) operator between different shape types"""
-    #     circle1 =       self.create_circle()
-    #     rectangle1 =    self.create_rectangle()
-    #     sphere1 =       self.create_sphere()
-    #     cuboid1 =       self.create_cuboid()
-    #     # testing greater equal than between all combination of shape classes
-    #     self.assertTrue(circle1     >= rectangle1)
-    #     self.assertFalse(circle1    >= sphere1)
-    #     self.assertFalse(circle1    >= cuboid1)
-    #     self.assertFalse(rectangle1 >= sphere1)
-    #     self.assertFalse(rectangle1 >= cuboid1)
-    #     self.assertTrue(sphere1     >= cuboid1)
+    def test_greater_equal_operator(self):
+        """Testing greater equal than (>=) operator between different shape types"""
+        circle1 = self.create_circle()
+        rectangle1 = self.create_rectangle()
+        sphere1 = self.create_sphere()
+        cuboid1 = self.create_cuboid()
+        # testing greater equal than between all combination of shape classes
+        with self.assertRaises(TypeError):
+            circle1 >= rectangle1
+        with self.assertRaises(TypeError):
+            circle1 >= sphere1
+        with self.assertRaises(TypeError):
+            circle1 >= cuboid1
+        with self.assertRaises(TypeError):
+            rectangle1 >= sphere1
+        with self.assertRaises(TypeError):
+            rectangle1 >= cuboid1
+        with self.assertRaises(TypeError):
+            sphere1 >= cuboid1
 
 
 if __name__ == "__main__":  # execute following code if run from this file:
