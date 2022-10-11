@@ -53,22 +53,32 @@ class Shape:  # super class of geometrical shapes
     # ----- Operator overloading for Shape class -----
     def __eq__(self, other: Shape) -> bool:
         """Override of equal (==) operator"""
+        if not type(self) == type(other):
+            raise TypeError(f"Cannot compare Cuboid with shape of other type")
         return self.area == other.area
 
     def __lt__(self, other: Shape) -> bool:
         """Override of lesser than (<) operator"""
+        if not type(self) == type(other):
+            raise TypeError(f"Cannot compare Cuboid with shape of other type")
         return self.area < other.area
 
     def __gt__(self, other: Shape) -> bool:
         """Override of greater than (>) operator"""
+        if not type(self) == type(other):
+            raise TypeError(f"Cannot compare Cuboid with shape of other type")
         return self.area > other.area
 
     def __le__(self, other: Shape) -> bool:
         """Override of lesser or equal (<=) operator"""
+        if not type(self) == type(other):
+            raise TypeError(f"Cannot compare Cuboid with shape of other type")
         return self.area <= other.area
 
     def __ge__(self, other: Shape) -> bool:
         """Override of greater or equal (>=) operator"""
+        if not type(self) == type(other):
+            raise TypeError(f"Cannot compare Cuboid with shape of other type")
         return self.area >= other.area
 
     # ----- Other methods -----
@@ -205,6 +215,8 @@ class Rectangle(Shape):  # sub-class inheriting from Shape
     # ----- Operator overloading for Rectangle class comparing sides and area -----
     def __eq__(self, other: Shape) -> bool:
         """Override of equal (==) operator"""
+        if not type(self) == type(other):
+            raise TypeError(f"Cannot compare Cuboid with shape of other type")
         if (
             self.width == other.width
             and self.height == other.height
@@ -382,6 +394,8 @@ class Cuboid(Rectangle):  # sub-class inheriting from Rectangle
     # ----- Operator overloading for Cuboid class comparing sides and volume -----
     def __eq__(self, other: Shape) -> bool:
         """Override of equal (==) operator"""
+        if not type(self) == type(other):
+            raise TypeError(f"Cannot compare Cuboid with shape of other type")
         if (
             self.width == other.width
             and self.height == other.height
@@ -393,18 +407,24 @@ class Cuboid(Rectangle):  # sub-class inheriting from Rectangle
 
     def __lt__(self, other: Shape) -> bool:
         """Override of lesser than (<) operator"""
+        if not type(self) == type(other):
+            raise TypeError(f"Cannot compare Cuboid with shape of other type")
         if self.volume < other.volume:
             return True
         return False
 
     def __gt__(self, other: Shape) -> bool:
         """Override of greater than (>) operator"""
+        if not type(self) == type(other):
+            raise TypeError(f"Cannot compare Cuboid with shape of other type")
         if self.volume > other.volume:
             return True
         return False
 
     def __le__(self, other: Shape) -> bool:
         """Override of lesser or equal (<=) operator"""
+        if not type(self) == type(other):
+            raise TypeError(f"Cannot compare Cuboid with shape of other type")
         if self.volume <= other.volume:
             return True
         return False
