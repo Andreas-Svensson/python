@@ -86,20 +86,21 @@ class Shape:  # super class of geometrical shapes
         self.x += x
         self.y += y
 
-    def plot_translation(self, ax, x: (int | float) = 0, y: (int | float) = 0) -> None:
+    def plot_translation(self, x: (int | float) = 0, y: (int | float) = 0) -> None:
         """Translate shape and plot it visually"""
-        patch1 = plott(self)
-        patch1.set_alpha(0.5)
-        plt.text(self.x, self.y, "original")
+        patch_list = []  # storing return values (patches)
 
-        ax.plot((self.x, x), (self.y, y), color="green")
+        patch_list.append(self.plot())  # create patch of self in previous position
+        # styling previous position to low alpha and black dotted outlines:
+        patch_list[0].set_alpha(0.3)
+        patch_list[0].set_linestyle("--")
+        patch_list[0].set_edgecolor("black")
 
-        self.translate(x, y)
+        self.translate(x, y)  # perform actual translation
 
-        patch2 = plott(self)
-        plt.text(self.x, self.y, "translated")
+        patch_list.append(self.plot())  # create patch of self in current position
 
-        return patch1, patch2
+        return patch_list  # return list containing patches of self in old and new positions
 
     # ----- String representation -----
     def __repr__(self) -> str:
