@@ -227,26 +227,28 @@ class Rectangle(Shape):  # sub-class inheriting from Shape
         """Perimeter of rectangle"""
         return self.width * 2 + self.height * 2
 
+    @property
+    def circumference(self) -> (int | float):
+        """Circumference of rectangle (same as perimeter - sum of all sides)"""
+        return self.perimeter
+
     # ----- Operator overloading for Rectangle class comparing sides and area -----
     def __eq__(self, other: Shape) -> bool:
         """Override of equal (==) operator"""
         if not type(self) == type(other):
             raise TypeError(f"Cannot compare Cuboid with shape of other type")
-        if (
+        return (
             self.width == other.width
             and self.height == other.height
             and self.area == other.area
-        ):
-            return True
-        return False
+        )
 
     # ----- Other methods -----
     def is_equilateral(self) -> bool:
         """Checks if Rectangle is a square"""
         if self.width == self.height:
             return True
-        else:
-            return False
+        return False
 
     def contains_point(self, x: (int | float), y: (int | float)) -> bool:
         """Check if rectangle contains a given point"""
@@ -278,7 +280,10 @@ class Rectangle(Shape):  # sub-class inheriting from Shape
 
     def __str__(self) -> str:
         """Describes self as a string for printing"""
-        return f"Rectangle in position x: {self.x}, y: {self.y}, with width: {self.width}, height: {self.height}, area: {self.area}, perimeter: {self.perimeter}"
+        location = f"({self.x},{self.y})"
+        rectangle_type = "Square" if self.is_equilateral() else "Rectangle"
+        sides = self.width if self.is_equilateral() else f"({self.width},{self.height})"
+        return f"{rectangle_type} in location: {location}, with sides: {sides}, and area: {self.area}"
 
 
 class Sphere(Circle):  # sub-class inheriting from Circle
@@ -340,12 +345,12 @@ class Sphere(Circle):  # sub-class inheriting from Circle
         else:
             return False
 
-    # TODO plot
-
     # ----- String representation -----
     def __repr__(self) -> str:
         """ "Describes self as a string"""
-        return f"Rectangle(x = {self.x}, y = {self.y}, z = {self.z}, radius = {self.radius})"
+        return (
+            f"Sphere(x = {self.x}, y = {self.y}, z = {self.z}, radius = {self.radius})"
+        )
 
     def __str__(self) -> str:
         """Describes self as a string for printing"""
@@ -373,6 +378,7 @@ class Cuboid(Rectangle):  # sub-class inheriting from Rectangle
         self.z = z  # z-coord of cuboid,  default 0
 
     # ----- Properties -----
+
     @property
     def length(self):
         return self._length
@@ -408,6 +414,11 @@ class Cuboid(Rectangle):  # sub-class inheriting from Rectangle
     @property
     def perimeter(self):
         return (self.width * 4) + (self.height * 4) + (self.length * 4)
+
+    @property
+    def circumference(self) -> NotImplementedError:
+        """Cuboids do not have a circumference, therefore should not be able to use it"""
+        raise NotImplementedError
 
     # ----- Operator overloading for Cuboid class comparing sides and volume -----
     def __eq__(self, other: Shape) -> bool:
@@ -458,15 +469,13 @@ class Cuboid(Rectangle):  # sub-class inheriting from Rectangle
     # ----- Other Methods -----
     def is_equilateral(self):
         """Checks if Cuboid is a Cube"""
-        if self.width == self.height and self.width == self.length:
-            return True
-        else:
-            return False
+        return self.width == self.height and self.width == self.length
 
     def translate(
         self, x: (int | float) = 0, y: (int | float) = 0, z: (int | float) = 0
     ) -> None:
-        super().translate(x, y)  # TODO better to calculate all here?
+        self.x += x
+        self.y += y
         self.z += z
 
     def contains_point(
@@ -481,12 +490,10 @@ class Cuboid(Rectangle):  # sub-class inheriting from Rectangle
         else:
             return False
 
-    # TODO plot
-
     # ----- String representation -----
     def __repr__(self) -> str:
         """ "Describes self as a string"""
-        return f"Rectangle(x = {self.x}, y = {self.y}, z = {self.z}, width = {self.width}, height = {self.height}, length = {self.length})"
+        return f"Cuboid(x = {self.x}, y = {self.y}, z = {self.z}, width = {self.width}, height = {self.height}, length = {self.length})"
 
     def __str__(self) -> str:
         """Describes self as a string for printing"""
