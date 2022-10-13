@@ -53,6 +53,12 @@ class TestCircle(unittest.TestCase):  # TestCircle sub-class of TestCase
         self.assertRaises(ValueError, Circle, 0, 1, 1)
         self.assertRaises(ValueError, Circle, -1, 1, 1)
 
+    # ----- Testing docstrings -----
+    def test_docstrings(self):
+        """Testing if all methods have docstrings"""
+        for method in Circle.__dict__.values():
+            self.assertIsNotNone(method.__doc__)
+
     # ----- Testing comparison operators (comparing area) -----
     def test_equality_operator(self):
         """Testing equal (==) operator on Circles"""
@@ -116,9 +122,9 @@ class TestCircle(unittest.TestCase):  # TestCircle sub-class of TestCase
         c2 = Circle(2, 0, 0)
         c3 = Circle(1, 0, 1)
 
-        self.assertTrue(c1.is_unit_circle())  # is unit circle
-        self.assertFalse(c2.is_unit_circle())
-        self.assertFalse(c3.is_unit_circle())
+        self.assertTrue(c1.is_unit_shape())  # is unit circle
+        self.assertFalse(c2.is_unit_shape())
+        self.assertFalse(c3.is_unit_shape())
 
     def test_calculate_area(self):
         """Testing if area of circle is calculated correctly"""
@@ -206,6 +212,12 @@ class TestRectangle(unittest.TestCase):  # TestRectangle sub-class of TestCase
         """Testing if creating Rectangle with invalid measurement raises ValueError"""
         self.assertRaises(ValueError, Rectangle, 0, 1, 1, 1)
         self.assertRaises(ValueError, Rectangle, -1, 1, 1, 1)
+
+    # ----- Testing docstrings -----
+    def test_docstrings(self):
+        """Testing if all methods have docstrings"""
+        for method in Rectangle.__dict__.values():
+            self.assertIsNotNone(method.__doc__)
 
     # ----- Testing comparison operators (comparing area) -----
     def test_equality_operator(self):
@@ -329,7 +341,7 @@ class TestRectangle(unittest.TestCase):  # TestRectangle sub-class of TestCase
         )  # bottom right corner
 
 
-class TestCircle(unittest.TestCase):  # TestCircle sub-class of TestCase
+class TestSphere(unittest.TestCase):  # TestSphere sub-class of TestCase
 
     # ----- Attribute values -----
     def setUp(self):
@@ -375,6 +387,12 @@ class TestCircle(unittest.TestCase):  # TestCircle sub-class of TestCase
         """Testing if creating Sphere with invalid measurement raises ValueError"""
         self.assertRaises(ValueError, Sphere, 0, 1, 1, 1)
         self.assertRaises(ValueError, Sphere, -1, 1, 1, 1)
+
+    # ----- Testing docstrings -----
+    def test_docstrings(self):
+        """Testing if all methods have docstrings"""
+        for method in Sphere.__dict__.values():
+            self.assertIsNotNone(method.__doc__)
 
     # ----- Testing comparison operators (comparing area) -----
     def test_equality_operator(self):
@@ -560,6 +578,12 @@ class TestCuboid(unittest.TestCase):  # TestCuboid sub-class of TestCase
         self.assertRaises(ValueError, Cuboid, -1, 1, 1, 1, 1, 1)  # -1
         self.assertRaises(ValueError, Cuboid, 1, -1, 1, 1, 1, 1)  # -1
         self.assertRaises(ValueError, Cuboid, 1, 1, -1, 1, 1, 1)  # -1
+
+    # ----- Testing docstrings -----
+    def test_docstrings(self):
+        """Testing if all methods have docstrings"""
+        for method in Cuboid.__dict__.values():
+            self.assertIsNotNone(method.__doc__)
 
     # ----- Testing comparison operators (comparing area) -----
     def test_equality_operator(self):
