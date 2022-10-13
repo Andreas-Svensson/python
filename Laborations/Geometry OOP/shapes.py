@@ -8,6 +8,7 @@ class Shape:  # super class of geometrical shapes
     """Super class of geometrical shapes: Circle, Rectangle, Sphere, Cuboid"""
 
     def __init__(self, x: (int | float) = 0, y: (int | float) = 0) -> None:
+        """Init method of Shape class, takes x,y coordinates of shape"""
 
         self.x = x  # x-coordinate of shape, default 0
         self.y = y  # y-coordinate of shape, default 0
@@ -83,6 +84,7 @@ class Shape:  # super class of geometrical shapes
 
     # ----- Other methods -----
     def translate(self, x: (int | float) = 0, y: (int | float) = 0) -> None:
+        """Moves shape x,y distance units"""
         self.x += x
         self.y += y
 
@@ -119,6 +121,7 @@ class Circle(Shape):  # sub-class inheriting from Shape
         x: (int | float) = 0,
         y: (int | float) = 0,
     ) -> None:
+        """Init method of Circle class, takes radius and x,y coordinates of circle"""
 
         super().__init__(x, y)  # x and y coordinates handled in super class
         self.radius = radius  # radius of circle, default 1
@@ -187,6 +190,7 @@ class Rectangle(Shape):  # sub-class inheriting from Shape
         x: (int | float) = 0,
         y: (int | float) = 0,
     ) -> None:
+        """Init method of Rectangle class, takeswidth, height and x,y coordinates of rectangle"""
 
         super().__init__(x, y)  # x and y coordinates handled in super class
         self.width = width  # width of rectangle,   default 1
@@ -293,6 +297,7 @@ class Sphere(Circle):  # sub-class inheriting from Circle
         y: (int | float) = 0,
         z: (int | float) = 0,
     ) -> None:
+        """Init method of Sphere class, takes radius and x,y,z coordinates of sphere"""
 
         super().__init__(
             radius, x, y
@@ -331,6 +336,7 @@ class Sphere(Circle):  # sub-class inheriting from Circle
     def translate(
         self, x: (int | float) = 0, y: (int | float) = 0, z: (int | float) = 0
     ):
+        """Moves sphere x,y,z distance units"""
         super().translate(x, y)
         self.z += z
 
@@ -373,6 +379,7 @@ class Cuboid(Rectangle):  # sub-class inheriting from Rectangle
         y: (int | float) = 0,
         z: (int | float) = 0,
     ) -> None:
+        """Init method of Cuboid class, takes width, height, length and x,y,z coordinates of cuboid"""
 
         super().__init__(
             width, height, x, y
@@ -384,6 +391,7 @@ class Cuboid(Rectangle):  # sub-class inheriting from Rectangle
 
     @property
     def length(self):
+        """Length of cuboid"""
         return self._length
 
     @length.setter
@@ -394,6 +402,7 @@ class Cuboid(Rectangle):  # sub-class inheriting from Rectangle
 
     @property
     def z(self):
+        """z-coordinate of cuboid"""
         return self._z
 
     @z.setter
@@ -404,6 +413,7 @@ class Cuboid(Rectangle):  # sub-class inheriting from Rectangle
 
     @property
     def area(self):
+        """Surface area of cuboid"""
         return 2 * (
             self.width * self.height
             + self.height * self.length
@@ -412,10 +422,12 @@ class Cuboid(Rectangle):  # sub-class inheriting from Rectangle
 
     @property
     def volume(self):
+        """Volume of cuboid"""
         return self.width * self.height * self.length
 
     @property
     def perimeter(self):
+        """Perimeter of cuboid (sum of all edges)"""
         return (self.width * 4) + (self.height * 4) + (self.length * 4)
 
     @property
@@ -477,6 +489,7 @@ class Cuboid(Rectangle):  # sub-class inheriting from Rectangle
     def translate(
         self, x: (int | float) = 0, y: (int | float) = 0, z: (int | float) = 0
     ) -> None:
+        """Move cuboid x,y,z distance units"""
         self.x += x
         self.y += y
         self.z += z
