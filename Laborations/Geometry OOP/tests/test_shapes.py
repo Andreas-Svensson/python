@@ -19,7 +19,7 @@ class TestCircle(unittest.TestCase):  # TestCircle sub-class of TestCase
     # ----- Attribute values -----
     def setUp(self):
         """Specifies values to use in creation of default test circles"""
-        self.r, self.x, self.y = 2, 3, 4  # TODO go through variety of values to test
+        self.r, self.x, self.y = 2, 3, 4
 
     # ----- Default circle for unit testing -----
     def create_circle(
@@ -176,7 +176,7 @@ class TestRectangle(unittest.TestCase):  # TestRectangle sub-class of TestCase
             4,
             -3,
             -2,
-        )  # TODO go through variety of values to test
+        )
 
     # ----- Default rectangle for unit testing -----
     def create_rectangle(
@@ -359,7 +359,7 @@ class TestSphere(unittest.TestCase):  # TestSphere sub-class of TestCase
             3,
             4,
             5,
-        )  # TODO go through variety of values to test
+        )
 
     # ----- Default sphere for unit testing -----
     def create_sphere(
