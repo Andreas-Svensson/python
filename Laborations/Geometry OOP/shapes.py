@@ -465,7 +465,7 @@ class Cuboid(Rectangle):  # sub-class inheriting from Rectangle
     # ----- Other Methods -----
     def is_equilateral(self):
         """Checks if Cuboid is a Cube"""
-        return self.width == self.height and self.width == self.length
+        return self.width == self.height == self.length
 
     def translate(
         self, x: (int | float) = 0, y: (int | float) = 0, z: (int | float) = 0
