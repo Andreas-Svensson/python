@@ -146,7 +146,7 @@ class Circle(Shape):  # sub-class inheriting from Shape
         return 2 * pi * self.radius
 
     # ----- Other methods -----
-    def is_unit_circle(self) -> bool:
+    def is_unit_shape(self) -> bool:
         """Checks if Circle is a unit circle (circle with radius 1 centered in origo)"""
         if self.radius == 1 and self.x == 0 and self.y == 0:
             return True
@@ -323,7 +323,8 @@ class Sphere(Circle):  # sub-class inheriting from Circle
 
     # ----- Methods -----
     def is_unit_shape(self) -> bool:
-        if super().is_unit_circle() and self.z == 0:
+        """Checks if Sphere is a unit sphere (sphere with radius 1 centered in origo)"""
+        if super().is_unit_shape() and self.z == 0:
             return True
         return False
 
