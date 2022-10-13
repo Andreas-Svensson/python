@@ -150,11 +150,10 @@ class Circle(Shape):  # sub-class inheriting from Shape
         """Checks if Circle is a unit circle (circle with radius 1 centered in origo)"""
         if self.radius == 1 and self.x == 0 and self.y == 0:
             return True
-        else:
-            return False
+        return False
 
     def contains_point(self, x: (int | float), y: (int | float)) -> bool:
-        """Check if circle contains a given point"""
+        """Check if circle contains a given point, points on edge considered inside"""
         distance = dist(
             (self.x, self.y), (x, y)
         )  # calculate euclidean distance between center point of self and input point
@@ -162,8 +161,7 @@ class Circle(Shape):  # sub-class inheriting from Shape
             distance <= self.radius
         ):  # if distance to input point is less than or equal to radius:
             return True  # point is within circle (including on circle border)
-        else:
-            return False  # point is outside circle
+        return False  # point is outside circle
 
     def plot(self) -> patches.Patch:
         """Returns patch containing circle"""
@@ -251,7 +249,7 @@ class Rectangle(Shape):  # sub-class inheriting from Shape
         return False
 
     def contains_point(self, x: (int | float), y: (int | float)) -> bool:
-        """Check if rectangle contains a given point"""
+        """Check if rectangle contains a given point, points on edge considered inside"""
         width_range, height_range = (
             self.width / 2,
             self.height / 2,
@@ -262,8 +260,7 @@ class Rectangle(Shape):  # sub-class inheriting from Shape
             and self.y - height_range <= y <= self.y + height_range
         ):  # if x and y within distance:
             return True  # point is within rectangle (including on rectangle border)
-        else:
-            return False  # point is outside rectangle
+        return False  # point is outside rectangle
 
     def plot(self) -> patches.Patch:
         """Returns patch containing rectangle"""
@@ -328,8 +325,7 @@ class Sphere(Circle):  # sub-class inheriting from Circle
     def is_unit_shape(self) -> bool:
         if super().is_unit_circle() and self.z == 0:
             return True
-        else:
-            return False
+        return False
 
     def translate(
         self, x: (int | float) = 0, y: (int | float) = 0, z: (int | float) = 0
@@ -340,10 +336,10 @@ class Sphere(Circle):  # sub-class inheriting from Circle
     def contains_point(
         self, x: (int | float), y: (int | float), z: (int | float)
     ) -> bool:
+        """Check if sphere contains a given point, points on edge considered inside"""
         if dist((self.x, self.y, self.z), (x, y, z)) <= self.radius:
             return True
-        else:
-            return False
+        return False
 
     # ----- String representation -----
     def __repr__(self) -> str:
@@ -481,14 +477,14 @@ class Cuboid(Rectangle):  # sub-class inheriting from Rectangle
     def contains_point(
         self, x: (int | float), y: (int | float), z: (int | float)
     ) -> bool:
+        """Check if cuboid contains a given point, points on edge considered inside"""
         length_range = self.length / 2
         if (
             super().contains_point(x, y)
             and self.z - length_range <= z <= self.z + length_range
         ):
             return True
-        else:
-            return False
+        return False
 
     # ----- String representation -----
     def __repr__(self) -> str:
