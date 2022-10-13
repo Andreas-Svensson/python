@@ -341,6 +341,12 @@ class Sphere(Circle):  # sub-class inheriting from Circle
             return True
         return False
 
+    def plot(self) -> NotImplementedError:
+        """Plotting of 3D-shapes not implemented"""
+        raise NotImplementedError(
+            f"Unable to plot {type(self).__name__}: Plotting of 3D-shapes not implemented"
+        )
+
     # ----- String representation -----
     def __repr__(self) -> str:
         """ "Describes self as a string"""
@@ -485,6 +491,12 @@ class Cuboid(Rectangle):  # sub-class inheriting from Rectangle
         ):
             return True
         return False
+
+    def plot(self) -> NotImplementedError:
+        """Plotting of 3D-shapes not implemented"""
+        raise NotImplementedError(
+            f"Unable to plot {type(self).__name__}: Plotting of 3D-shapes not implemented"
+        )
 
     # ----- String representation -----
     def __repr__(self) -> str:
