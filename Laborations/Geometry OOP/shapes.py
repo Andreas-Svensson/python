@@ -88,7 +88,7 @@ class Shape:  # super class of geometrical shapes
         self.x += x
         self.y += y
 
-    def plot_translation(self, x: (int | float) = 0, y: (int | float) = 0) -> None:
+    def plot_translation(self, x: (int | float) = 0, y: (int | float) = 0) -> list:
         """Translate shape and plot it visually"""
         patch_list = []  # storing return values (patches)
 
